@@ -232,18 +232,17 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(165deg, rgba(22,25,31,0.7) 0%, rgba(22,25,31,0.4) 50%, rgba(22,25,31,0.85) 100%),
-        linear-gradient(to bottom, transparent 50%, var(--black) 100%);
+        linear-gradient(165deg, rgba(22,25,31,0.82) 0%, rgba(22,25,31,0.55) 50%, rgba(22,25,31,0.90) 100%),
+        linear-gradient(to bottom, transparent 40%, var(--black) 100%);
       z-index: 1;
     }
 
     .hero-photo {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse at 70% 40%, #2B4C6F 0%, transparent 60%),
-        radial-gradient(ellipse at 20% 80%, #1a2535 0%, transparent 50%),
-        #16191F;
+      background-image: url('images/stephen-site.jpeg');
+      background-size: cover;
+      background-position: center 30%;
       z-index: 0;
     }
 
@@ -631,10 +630,14 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--amber);
+      overflow: hidden;
+    }
+
+    .founder-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .founder-name {
@@ -1654,7 +1657,9 @@
           </p>
 
           <div class="founder-card">
-            <div class="founder-avatar" aria-hidden="true">SF</div>
+            <div class="founder-avatar">
+              <img src="images/stephen-portrait.jpeg" alt="Stephen Ford, Founder of BuilderPilot">
+            </div>
             <div>
               <div class="founder-name">Stephen Ford</div>
               <p class="founder-title">Founder · 20+ years, low-rise residential production</p>
