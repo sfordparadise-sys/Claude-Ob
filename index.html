@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuilderPilot — Field Systems for Production Residential Construction</title>
+  <meta name="description" content="BuilderPilot equips residential site supervisors and builders with the field leadership systems, accountability frameworks, and practical tools to run tight sites and develop high-performing teams.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #16191F;
+      --navy:    #2B4C6F;
+      --blue:    #3E6A97;
+      --amber:   #F2A33C;
+      --amber-dk:#D4891E;
+      --white:   #FFFFFF;
+      --gray:    #94A3B8;
+      --gray-lt: #CBD5E1;
+      --surface: #1E2530;
+      --surface2:#252D3A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { position: relative; }
+
+    /* ─── NAV ────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 0 24px;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(22, 25, 31, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--black);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-logo-icon span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .nav-logo-icon span em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .nav-wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-wordmark em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gray-lt);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-dk);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      border: none;
+      background: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ───────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(165deg, rgba(22,25,31,0.7) 0%, rgba(22,25,31,0.4) 50%, rgba(22,25,31,0.85) 100%),
+        linear-gradient(to bottom, transparent 50%, var(--black) 100%);
+      z-index: 1;
+    }
+
+    /* Aerial construction photo simulation — replaced with SVG pattern */
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 40%, #2B4C6F 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, #1a2535 0%, transparent 50%),
+        #16191F;
+      z-index: 0;
+    }
+
+    /* Grid overlay for construction feel */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(var(--white) 1px, transparent 1px),
+        linear-gradient(90deg, var(--white) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0 80px;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow-line {
+      width: 32px;
+      height: 2px;
+      background: var(--amber);
+    }
+
+    .hero h1 {
+      font-size: clamp(56px, 8vw, 100px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      line-height: 0.95;
+    }
+
+    .hero h1 em {
+      color: var(--amber);
+      font-style: normal;
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--gray-lt);
+      max-width: 540px;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.4;
+    }
+
+    .hero-scroll span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      animation: scrollBounce 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ─── STATS BAR ──────────────────────────────── */
+    .stats-bar {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0;
+    }
+
+    .stats-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ─── SECTION SPACING ────────────────────────── */
+    .section-pad { padding: 96px 0; }
+    .section-pad-sm { padding: 64px 0; }
+
+    .section-header {
+      margin-bottom: 64px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-top: 12px;
+    }
+
+    .section-header h2 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .section-header p {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 520px;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    /* ─── PROBLEM SECTION ────────────────────────── */
+    .problem-bg {
+      background: var(--surface);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .problem-text h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      line-height: 0.95;
+    }
+
+    .problem-text h2 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .problem-text p {
+      color: var(--gray);
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .problem-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 16px;
+      color: var(--gray-lt);
+    }
+
+    .problem-list li svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--amber);
+    }
+
+    .principle-card-large {
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .principle-card-large::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--amber);
+    }
+
+    .pcl-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .pcl-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .pcl-text em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .pcl-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 28px;
+    }
+
+    /* ─── WHAT IS BUILDERPILOT ───────────────────── */
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .what-text h2 {
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    .what-text h2 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .what-text p {
+      color: var(--gray);
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .what-text a { margin-top: 16px; }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px 28px;
+      background: var(--surface);
+      cursor: default;
+      transition: background 0.2s;
+    }
+
+    .feature-item:hover { background: var(--surface2); }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: rgba(242, 163, 60, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--amber);
+    }
+
+    .feature-item h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+    }
+
+    .feature-item p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* ─── PILLARS ─────────────────────────────────── */
+    .pillars-bg { background: var(--navy); }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pillar-card {
+      background: rgba(22, 25, 31, 0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(242, 163, 60, 0.4);
+    }
+
+    .pillar-card::after {
+      content: attr(data-num);
+      position: absolute;
+      bottom: -10px;
+      right: 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 100px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .pillar-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      background: rgba(242, 163, 60, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--amber);
+      margin-bottom: 24px;
+    }
+
+    .pillar-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .pillar-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    .pillar-topics {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .topic-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    /* ─── PRINCIPLES ──────────────────────────────── */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .principle-card {
+      border-radius: 12px;
+      padding: 44px 40px;
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .principle-card.dark {
+      background: #16191F;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .principle-card.blue {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .principle-card.amber {
+      background: var(--amber);
+    }
+
+    .principle-card.dark-blue {
+      background: #1a2535;
+      border: 1px solid rgba(62,106,151,0.3);
+    }
+
+    .pc-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 20px;
+    }
+
+    .principle-card.amber .pc-eyebrow { color: var(--black); }
+
+    .pc-quote {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      flex: 1;
+    }
+
+    .principle-card.amber .pc-quote { color: var(--black); }
+
+    .pc-quote em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .principle-card.amber .pc-quote em {
+      color: var(--black);
+      text-decoration: underline;
+      text-decoration-color: rgba(22,25,31,0.3);
+    }
+
+    .pc-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      margin-top: 24px;
+    }
+
+    .principle-card.amber .pc-brand { color: var(--black); }
+
+    /* ─── WHO IT'S FOR ────────────────────────────── */
+    .audience-bg { background: var(--surface); }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .audience-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 32px 28px;
+      background: var(--black);
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .audience-card:hover {
+      border-color: rgba(242, 163, 60, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .audience-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .audience-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .audience-benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .audience-benefits li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gray-lt);
+    }
+
+    .audience-benefits li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+
+    /* ─── HOW IT WORKS ───────────────────────────── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(16.66% + 28px);
+      right: calc(16.66% + 28px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--amber), var(--blue), var(--amber));
+      opacity: 0.3;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid rgba(242, 163, 60, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--amber);
+      margin-bottom: 24px;
+    }
+
+    .step-item h3 {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .step-item p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─── CTA SECTION ────────────────────────────── */
+    .cta-section {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(242,163,60,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 50%, rgba(62,106,151,0.2) 0%, transparent 60%);
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .cta-inner h2 {
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .cta-inner h2 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .cta-inner p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cta-form input {
+      flex: 1;
+      padding: 14px 20px;
+      background: rgba(22,25,31,0.6);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      min-width: 0;
+    }
+
+    .cta-form input::placeholder { color: rgba(255,255,255,0.3); }
+
+    .cta-form input:focus {
+      border-color: var(--amber);
+    }
+
+    .cta-form button {
+      border-radius: 0 6px 6px 0;
+      white-space: nowrap;
+    }
+
+    .cta-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer {
+      background: #0F1218;
+      padding: 64px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 260px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .footer-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .footer-logo-icon span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-logo-icon span em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .footer-logo-wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-logo-wordmark em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .footer-col h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col ul li + li { margin-top: 10px; }
+
+    .footer-col ul li a {
+      font-size: 14px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .footer-bottom p em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .social-links a:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* ─── MOBILE NAV ─────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(22, 25, 31, 0.97);
+      backdrop-filter: blur(16px);
+      z-index: 49;
+      padding: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray-lt);
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s;
+    }
+
+    .mobile-nav a:hover { color: var(--white); }
+
+    .mobile-nav .btn-primary { margin-top: 16px; justify-content: center; }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 1024px) {
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta-desktop { display: none; }
+      .hamburger { display: flex; }
+
+      .hero h1 { font-size: 52px; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; }
+
+      .problem-grid { grid-template-columns: 1fr; }
+      .what-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; gap: 40px; }
+      .steps-grid::before { display: none; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+      .cta-form { flex-direction: column; }
+      .cta-form input { border-right: 1.5px solid rgba(255,255,255,0.15); border-radius: 6px; }
+      .cta-form button { border-radius: 6px; }
+
+      .stat-divider { display: none; }
+      .stats-grid { gap: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .section-pad { padding: 64px 0; }
+      .hero-content { padding: 96px 0 64px; }
+      .principle-card { padding: 32px 24px; }
+    }
+
+    /* ─── UTILITIES ──────────────────────────────── */
+    .text-amber { color: var(--amber); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ──────────────────────────────────── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="BuilderPilot home">
+        <div class="nav-logo-icon">
+          <span>B<em>P</em></span>
+        </div>
+        <span class="nav-wordmark">Builder<em>Pilot</em></span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#what">About</a></li>
+        <li><a href="#pillars">Content</a></li>
+        <li><a href="#principles">Principles</a></li>
+        <li><a href="#who">Who It's For</a></li>
+      </ul>
+
+      <a href="#access" class="btn-primary nav-cta-desktop">
+        Get Access
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleNav(this)">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav -->
+  <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="#what" onclick="closeMobileNav()">About</a>
+    <a href="#pillars" onclick="closeMobileNav()">Content</a>
+    <a href="#principles" onclick="closeMobileNav()">Principles</a>
+    <a href="#who" onclick="closeMobileNav()">Who It's For</a>
+    <a href="#access" class="btn-primary" onclick="closeMobileNav()">Get Access</a>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-line" aria-hidden="true"></div>
+          <span class="label">Field Systems for Production Residential Construction</span>
+        </div>
+
+        <h1>
+          Build Tight.
+          <em>Lead Right.</em>
+        </h1>
+
+        <p class="hero-sub">
+          BuilderPilot gives residential site supervisors and production builders the field leadership systems, accountability frameworks, and practical playbooks to run high-output sites — consistently.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#access" class="btn-primary">
+            Start Learning
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#what" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <svg class="scroll-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <!-- ─── STATS BAR ──────────────────────────────── -->
+  <div class="stats-bar" role="region" aria-label="BuilderPilot by the numbers">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Field Leadership Modules</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Residential Build Focused</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Core Content Pillars</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <div class="stat-number">Real</div>
+          <div class="stat-label">Field-Tested Systems</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PROBLEM ───────────────────────────────── -->
+  <section class="problem-bg section-pad" aria-labelledby="problem-heading">
+    <div class="container">
+      <div class="problem-grid">
+        <div class="problem-text">
+          <span class="label">The Field Reality</span>
+          <h2 id="problem-heading">
+            The Gap Starts<br>at the <em>Top of the Site.</em>
+          </h2>
+          <p>
+            Most site supervisors are promoted because they're good tradespeople — not because they're trained leaders. The result: inconsistent sites, frustrated trades, blown schedules, and burnout.
+          </p>
+          <p>
+            Production residential construction moves fast. Your supervisors need systems, not just skills.
+          </p>
+
+          <ul class="problem-list" role="list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Trades showing up to sites with no direction
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Supervisors firefighting instead of leading
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              No handover systems between stages
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Quality issues caught too late, costing time and money
+            </li>
+          </ul>
+        </div>
+
+        <div class="principle-card-large" role="figure" aria-label="BuilderPilot principle: No Bad Trades">
+          <div class="pcl-eyebrow">Leadership Principle</div>
+          <div class="pcl-text">
+            No Bad<br>Trades.<br>Only Bad<br><em>Leadership.</em>
+          </div>
+          <div class="pcl-brand">BuilderPilot</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHAT IS BUILDERPILOT ──────────────────── -->
+  <section class="section-pad" id="what" aria-labelledby="what-heading">
+    <div class="container">
+      <div class="what-grid">
+        <div class="feature-list" role="list" aria-label="BuilderPilot features">
+          <div class="feature-item" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div>
+              <h4>Field Leadership Education</h4>
+              <p>Short-form video content and written frameworks built for supervisors on the go — not in a classroom.</p>
+            </div>
+          </div>
+
+          <div class="feature-item" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
+            <div>
+              <h4>Accountability Systems</h4>
+              <p>Checklists, stage-gate frameworks, and inspection systems that create consistent outcomes across every lot.</p>
+            </div>
+          </div>
+
+          <div class="feature-item" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <h4>Trade Coordination Playbooks</h4>
+              <p>Proven strategies for sequencing trades, managing relationships, and running smooth handovers between stages.</p>
+            </div>
+          </div>
+
+          <div class="feature-item" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h4>Production Builder Mindset</h4>
+              <p>Leadership principles and mental frameworks to develop high-performance supervisors who own their results.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="what-text">
+          <span class="label">What is BuilderPilot</span>
+          <h2 id="what-heading">
+            The Pilot<br>Program for<br><em>Field Leaders.</em>
+          </h2>
+          <p>
+            BuilderPilot is educational content built specifically for the residential construction field. Every module, framework, and principle comes from real production build experience — not theory.
+          </p>
+          <p>
+            Whether you're a first-year supervisor finding your feet, or a builder looking to develop your field team, BuilderPilot gives you the systems to build consistency into every site.
+          </p>
+          <a href="#access" class="btn-primary" style="margin-top: 8px; display: inline-flex;">
+            Get Early Access
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PILLARS ────────────────────────────────── -->
+  <section class="pillars-bg section-pad" id="pillars" aria-labelledby="pillars-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Content Pillars</span>
+        <h2 id="pillars-heading">Four Pillars of<br><em>Field Excellence.</em></h2>
+        <p>Every piece of BuilderPilot content sits inside one of four core pillars — each addressing a real gap in how residential sites are led and managed.</p>
+      </div>
+
+      <div class="pillars-grid">
+
+        <div class="pillar-card" data-num="01" tabindex="0">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <h3>Field Leadership</h3>
+          <p>Develop supervisors who lead with intent. Cover the mindset, communication, and presence needed to hold a site to a high standard every day.</p>
+          <div class="pillar-topics">
+            <span class="topic-tag">Accountability</span>
+            <span class="topic-tag">Communication</span>
+            <span class="topic-tag">Culture</span>
+            <span class="topic-tag">Decision-Making</span>
+          </div>
+        </div>
+
+        <div class="pillar-card" data-num="02" tabindex="0">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Site Systems</h3>
+          <p>Implement daily, weekly, and stage-based systems that keep your site moving. Checklists, stage-gate inspections, and handover protocols that stick.</p>
+          <div class="pillar-topics">
+            <span class="topic-tag">Checklists</span>
+            <span class="topic-tag">Stage Gates</span>
+            <span class="topic-tag">Inspections</span>
+            <span class="topic-tag">Handovers</span>
+          </div>
+        </div>
+
+        <div class="pillar-card" data-num="03" tabindex="0">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Trade Management</h3>
+          <p>Get the most out of your trade relationships. Learn how to sequence, brief, and hold trades accountable without burning the relationship.</p>
+          <div class="pillar-topics">
+            <span class="topic-tag">Sequencing</span>
+            <span class="topic-tag">Briefing</span>
+            <span class="topic-tag">Relationships</span>
+            <span class="topic-tag">Productivity</span>
+          </div>
+        </div>
+
+        <div class="pillar-card" data-num="04" tabindex="0">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3>Production Builder Mindset</h3>
+          <p>The mental game of residential construction. Managing pressure, maintaining quality at pace, and building a career as a true production professional.</p>
+          <div class="pillar-topics">
+            <span class="topic-tag">Mindset</span>
+            <span class="topic-tag">Quality at Pace</span>
+            <span class="topic-tag">Resilience</span>
+            <span class="topic-tag">Career</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRINCIPLES ────────────────────────────── -->
+  <section class="section-pad" id="principles" aria-labelledby="principles-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Field Principles</span>
+        <h2 id="principles-heading">How We Think<br>About <em>The Field.</em></h2>
+        <p>The principles behind BuilderPilot shape every module, every framework, and every piece of content we create.</p>
+      </div>
+
+      <div class="principles-grid">
+
+        <div class="principle-card dark" role="figure" aria-label="Leadership principle: No bad trades, only bad leadership">
+          <div class="pc-eyebrow">Leadership Principle</div>
+          <div class="pc-quote">
+            No Bad<br>Trades.<br>Only Bad<br><em>Leadership.</em>
+          </div>
+          <div class="pc-brand">BuilderPilot</div>
+        </div>
+
+        <div class="principle-card blue" role="figure" aria-label="Leadership principle: Lead like you own it">
+          <div class="pc-eyebrow">Field Leadership.</div>
+          <div class="pc-quote">
+            Lead Like<br>You<br><em>Own It.</em>
+          </div>
+          <div class="pc-brand">BuilderPilot</div>
+        </div>
+
+        <div class="principle-card dark-blue" role="figure" aria-label="Production principle: The site is a reflection of the supervisor">
+          <div class="pc-eyebrow">Production Principle</div>
+          <div class="pc-quote">
+            The Site Is A<br>Reflection of<br>The <em>Supervisor.</em>
+          </div>
+          <div class="pc-brand">BuilderPilot</div>
+        </div>
+
+        <div class="principle-card amber" role="figure" aria-label="Systems principle: Systems win. Heroics lose.">
+          <div class="pc-eyebrow" style="color: #16191F;">Systems Principle</div>
+          <div class="pc-quote">
+            Systems<br>Win.<br>Heroics<br>Lose.
+          </div>
+          <div class="pc-brand">BuilderPilot</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHO IT'S FOR ──────────────────────────── -->
+  <section class="audience-bg section-pad" id="who" aria-labelledby="who-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Who It's For</span>
+        <h2 id="who-heading">Built for the<br><em>People on Site.</em></h2>
+        <p>BuilderPilot is for the people who actually build the homes — not the ones sitting behind a desk.</p>
+      </div>
+
+      <div class="audience-grid">
+
+        <div class="audience-card" tabindex="0">
+          <div class="audience-role">Site Supervisors</div>
+          <p>Running one or more production sites and looking to sharpen your systems, improve your trade relationships, and become a leader your team trusts.</p>
+          <ul class="audience-benefits" role="list">
+            <li>Practical daily systems you can use tomorrow</li>
+            <li>Leadership frameworks built for the field</li>
+            <li>Trade coordination strategies that actually work</li>
+            <li>Mindset tools to manage pressure and pace</li>
+          </ul>
+        </div>
+
+        <div class="audience-card" tabindex="0">
+          <div class="audience-role">Production Builders</div>
+          <p>Growing a residential construction business and need to develop your field team from the inside — without sending everyone off to a generic management course.</p>
+          <ul class="audience-benefits" role="list">
+            <li>Content built for residential construction specifically</li>
+            <li>Consistent language and systems across your team</li>
+            <li>Tools to identify and develop emerging leaders</li>
+            <li>Practical playbooks your team will actually use</li>
+          </ul>
+        </div>
+
+        <div class="audience-card" tabindex="0">
+          <div class="audience-role">New to the Role</div>
+          <p>Recently stepped up from trades to supervision and feeling the weight of the shift — more responsibility, less certainty. BuilderPilot helps you build confidence fast.</p>
+          <ul class="audience-benefits" role="list">
+            <li>Step-by-step site setup and stage systems</li>
+            <li>Communication frameworks for hard conversations</li>
+            <li>The fundamentals of field leadership from day one</li>
+            <li>Real-world advice without the theory</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOW IT WORKS ──────────────────────────── -->
+  <section class="section-pad" aria-labelledby="how-heading">
+    <div class="container">
+      <div class="section-header" style="text-align: center; align-items: center; display: flex; flex-direction: column;">
+        <span class="label">How It Works</span>
+        <h2 id="how-heading">Simple to Start.<br><em>Built to Stick.</em></h2>
+        <p style="text-align: center;">No long courses, no complex onboarding. BuilderPilot content is designed to fit into the working day of a busy field leader.</p>
+      </div>
+
+      <div class="steps-grid">
+
+        <div class="step-item">
+          <div class="step-num" aria-hidden="true">1</div>
+          <h3>Access the Content</h3>
+          <p>Get immediate access to BuilderPilot's growing library of field leadership modules, frameworks, and playbooks — all built for the residential build environment.</p>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num" aria-hidden="true">2</div>
+          <h3>Apply on Site</h3>
+          <p>Every module is short, practical, and immediately actionable. Read it in the ute, watch it between trades, implement it by the next morning on site.</p>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num" aria-hidden="true">3</div>
+          <h3>Build Your Standard</h3>
+          <p>Over time, the systems compound. Your sites run tighter, your team performs better, and your reputation as a field leader is built on consistent results.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ───────────────────────────────────── -->
+  <section class="cta-section section-pad" id="access" aria-labelledby="cta-heading">
+    <div class="container">
+      <div class="cta-inner">
+        <span class="label" style="display: block; margin-bottom: 16px;">Early Access</span>
+        <h2 id="cta-heading">
+          Ready to<br>Pilot Your <em>Field?</em>
+        </h2>
+        <p>
+          Join the BuilderPilot community and be the first to access new field leadership content, site systems, and practical frameworks as they drop.
+        </p>
+
+        <form class="cta-form" onsubmit="handleSubmit(event)" novalidate>
+          <label for="email-input" class="sr-only">Email address</label>
+          <input
+            type="email"
+            id="email-input"
+            name="email"
+            placeholder="Your email address"
+            autocomplete="email"
+            required
+          >
+          <button type="submit" class="btn-primary">Get Access</button>
+        </form>
+
+        <p class="cta-note">No spam. Unsubscribe anytime. Built for people who build.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <a href="#" class="footer-logo" aria-label="BuilderPilot home">
+            <div class="footer-logo-icon" aria-hidden="true">
+              <span>B<em>P</em></span>
+            </div>
+            <span class="footer-logo-wordmark">Builder<em>Pilot</em></span>
+          </a>
+          <p>Field systems for production residential construction. Educational content for site supervisors and builders who want to lead and build at the highest level.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Content</h5>
+          <ul role="list">
+            <li><a href="#pillars">Field Leadership</a></li>
+            <li><a href="#pillars">Site Systems</a></li>
+            <li><a href="#pillars">Trade Management</a></li>
+            <li><a href="#pillars">Builder Mindset</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul role="list">
+            <li><a href="#what">About</a></li>
+            <li><a href="#who">Who It's For</a></li>
+            <li><a href="#principles">Principles</a></li>
+            <li><a href="#access">Get Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Follow</h5>
+          <ul role="list">
+            <li><a href="#" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="#" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="#" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="#" rel="noopener noreferrer">Podcast</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 <em>BuilderPilot</em>. Field Systems for Production Residential Construction. All rights reserved.</p>
+        <div class="social-links" role="list" aria-label="Social media links">
+
+          <!-- Instagram -->
+          <a href="#" aria-label="BuilderPilot on Instagram" rel="noopener noreferrer" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="#" aria-label="BuilderPilot on LinkedIn" rel="noopener noreferrer" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+
+          <!-- YouTube -->
+          <a href="#" aria-label="BuilderPilot on YouTube" rel="noopener noreferrer" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Screen reader only utility -->
+  <style>.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }</style>
+
+  <script>
+    // ─── Sticky nav
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ─── Mobile nav toggle
+    function toggleNav(btn) {
+      const mobileNav = document.getElementById('mobile-nav');
+      const isOpen = mobileNav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+    }
+
+    function closeMobileNav() {
+      document.getElementById('mobile-nav').classList.remove('open');
+      document.querySelector('.hamburger').setAttribute('aria-expanded', 'false');
+    }
+
+    // ─── Close mobile nav on outside click
+    document.addEventListener('click', (e) => {
+      const nav = document.getElementById('mobile-nav');
+      const btn = document.querySelector('.hamburger');
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // ─── Form submission
+    function handleSubmit(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('input');
+      const btn = e.target.querySelector('button');
+      if (!input.value || !input.validity.valid) {
+        input.focus();
+        return;
+      }
+      btn.textContent = 'You\'re In!';
+      btn.disabled = true;
+      input.disabled = true;
+      input.value = '';
+      input.placeholder = 'Welcome to BuilderPilot.';
+    }
+  </script>
+
+</body>
+</html>
