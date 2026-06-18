@@ -99,23 +99,23 @@
     .nav-logo-icon {
       width: 40px;
       height: 40px;
-      background: var(--black);
+      background: var(--amber);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      border: 1px solid rgba(255,255,255,0.1);
     }
 
     .nav-logo-icon span {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 15px;
       font-weight: 800;
+      color: var(--black);
     }
 
     .nav-logo-icon span em {
-      color: var(--amber);
+      color: var(--black);
       font-style: normal;
     }
 
@@ -1214,7 +1214,7 @@
     .footer-logo-icon {
       width: 36px;
       height: 36px;
-      background: var(--navy);
+      background: var(--amber);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -1226,11 +1226,11 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 13px;
       font-weight: 800;
-      color: var(--white);
+      color: var(--black);
     }
 
     .footer-logo-icon span em {
-      color: var(--amber);
+      color: var(--black);
       font-style: normal;
     }
 
@@ -1403,6 +1403,261 @@
     }
 
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* ─── LEAD MAGNET POPUP ──────────────────────── */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(5px);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .popup-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-modal {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid var(--amber);
+      border-radius: 16px;
+      max-width: 840px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(24px) scale(0.98);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+
+    .popup-overlay.open .popup-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .popup-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1fr;
+      min-height: 480px;
+    }
+
+    .popup-visual {
+      background: #0c0f15;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .popup-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .popup-visual-badge {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+      padding: 28px 20px 20px;
+      text-align: center;
+    }
+
+    .popup-visual-badge span {
+      display: inline-block;
+      background: var(--amber);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 18px;
+      border-radius: 4px;
+    }
+
+    .popup-content {
+      padding: 44px 40px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--gray);
+      cursor: pointer;
+      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .popup-close:hover {
+      background: rgba(255,255,255,0.14);
+      color: var(--white);
+    }
+
+    .popup-content h2 {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 12px 0 14px;
+      line-height: 1.05;
+    }
+
+    .popup-content > p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .popup-includes {
+      list-style: none;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .popup-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .popup-includes li svg {
+      flex-shrink: 0;
+      color: var(--amber);
+      margin-top: 1px;
+    }
+
+    .popup-field {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .popup-field input[type="email"] {
+      flex: 1;
+      padding: 13px 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(255,255,255,0.13);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      min-width: 0;
+    }
+
+    .popup-field input[type="email"]:focus {
+      border-color: var(--amber);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .popup-field input[type="email"]::placeholder { color: rgba(148,163,184,0.7); }
+
+    .popup-field .btn-primary {
+      border-radius: 0 6px 6px 0;
+      white-space: nowrap;
+      font-size: 13px;
+      padding: 13px 18px;
+    }
+
+    .popup-fine {
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      margin: 0;
+    }
+
+    .popup-success {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      padding: 24px;
+      background: rgba(242,163,60,0.07);
+      border: 1px solid rgba(242,163,60,0.22);
+      border-radius: 10px;
+      margin-top: auto;
+    }
+
+    .popup-success.visible { display: flex; }
+
+    .popup-success-check {
+      width: 40px;
+      height: 40px;
+      background: var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+
+    .popup-success h3 {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .popup-success p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .popup-success .btn-primary {
+      font-size: 13px;
+      padding: 11px 20px;
+      align-self: flex-start;
+    }
+
+    .popup-error-msg {
+      font-size: 12px;
+      color: #f87171;
+      margin-top: 6px;
+      display: none;
+    }
+
+    @media (max-width: 680px) {
+      .popup-grid { grid-template-columns: 1fr; }
+      .popup-visual { display: none; }
+      .popup-content { padding: 36px 28px 32px; }
+      .popup-field { flex-direction: column; }
+      .popup-field input[type="email"] { border-right: 1.5px solid rgba(255,255,255,0.13); border-radius: 6px; }
+      .popup-field .btn-primary { border-radius: 6px; margin-top: 8px; }
+    }
   </style>
 <script>
 (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
@@ -2039,6 +2294,81 @@ ml('account', '2448027');
     </div>
   </footer>
 
+  <!-- ─── LEAD MAGNET POPUP ────────────────────── -->
+  <div class="popup-overlay" id="leadPopup" aria-hidden="true">
+    <div class="popup-modal" role="dialog" aria-modal="true" aria-labelledby="popup-heading">
+      <button class="popup-close" onclick="closeLeadPopup()" aria-label="Close popup">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="popup-grid">
+
+        <!-- Visual: checklist cover -->
+        <div class="popup-visual" aria-hidden="true">
+          <img src="images/checklist-cover.png" alt="">
+          <div class="popup-visual-badge"><span>Free Download · Pre-Drywall System</span></div>
+        </div>
+
+        <!-- Copy + form -->
+        <div class="popup-content">
+          <span class="label">Before You Board Up The Walls</span>
+          <h2 id="popup-heading">Catch the<br>Misses Before<br><em>Board Goes Up.</em></h2>
+          <p>The Pre-Drywall Inspection Checklist — 6 stations, fillable on your phone or tablet. Plus the 25 Drywall Killers as a bonus.</p>
+
+          <ul class="popup-includes" role="list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Pre-Drywall Inspection Checklist (6 stations)
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Bonus: The 25 Drywall Killers (framing, mechanical &amp; rough-in misses)
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Print or fill on screen — built for the field
+            </li>
+          </ul>
+
+          <form id="popupForm" onsubmit="handlePopupSubmit(event)" novalidate>
+            <div class="popup-field">
+              <input
+                type="email"
+                id="popupEmail"
+                name="email"
+                placeholder="your@email.com"
+                required
+                autocomplete="email"
+                aria-label="Your email address"
+              >
+              <button type="submit" class="btn-primary" id="popupSubmitBtn">
+                Send It to Me
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+            <p class="popup-error-msg" id="popupError" role="alert"></p>
+            <p class="popup-fine">Free. No spam. Unsubscribe any time.</p>
+          </form>
+
+          <!-- Success state -->
+          <div class="popup-success" id="popupSuccess" aria-live="polite">
+            <div class="popup-success-check" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>You're In.</h3>
+            <p>Check your inbox. While you wait, download the 25 Drywall Killers directly:</p>
+            <a href="downloads/BuilderPilot_25_Drywall_Killers.pdf" class="btn-primary" download>
+              Download Now
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </a>
+            <p class="popup-fine">The full Pre-Drywall Checklist will arrive by email shortly.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -2078,6 +2408,123 @@ ml('account', '2448027');
       input.disabled = true;
       input.value = '';
       input.placeholder = 'Check your inbox for the checklist.';
+    }
+
+    /* ─── LEAD MAGNET POPUP ────────────────────── */
+    (function() {
+      const SUBSCRIBED_KEY  = 'bp_subscribed';
+      const DISMISSED_KEY   = 'bp_popup_dismissed';
+      const DISMISS_TTL     = 3 * 24 * 60 * 60 * 1000; // 3 days
+
+      function shouldShow() {
+        if (localStorage.getItem(SUBSCRIBED_KEY)) return false;
+        const ts = localStorage.getItem(DISMISSED_KEY);
+        if (ts && (Date.now() - parseInt(ts, 10)) < DISMISS_TTL) return false;
+        return true;
+      }
+
+      window.openLeadPopup = function() {
+        if (!shouldShow()) return;
+        const overlay = document.getElementById('leadPopup');
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('popupEmail').focus();
+      };
+
+      window.closeLeadPopup = function() {
+        const overlay = document.getElementById('leadPopup');
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        localStorage.setItem(DISMISSED_KEY, Date.now().toString());
+      };
+
+      // Trigger: 7 seconds after load
+      let triggered = false;
+      function trigger() {
+        if (triggered) return;
+        triggered = true;
+        openLeadPopup();
+      }
+
+      setTimeout(trigger, 7000);
+
+      // Trigger: scroll past hero
+      window.addEventListener('scroll', function onScroll() {
+        if (window.scrollY > window.innerHeight * 0.85) {
+          trigger();
+          window.removeEventListener('scroll', onScroll);
+        }
+      }, { passive: true });
+
+      // Close on overlay click
+      document.getElementById('leadPopup').addEventListener('click', function(e) {
+        if (e.target === this) closeLeadPopup();
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && document.getElementById('leadPopup').classList.contains('open')) {
+          closeLeadPopup();
+        }
+      });
+    })();
+
+    async function handlePopupSubmit(e) {
+      e.preventDefault();
+      const email   = document.getElementById('popupEmail').value.trim();
+      const btn     = document.getElementById('popupSubmitBtn');
+      const errEl   = document.getElementById('popupError');
+
+      errEl.style.display = 'none';
+      errEl.textContent = '';
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEl.textContent = 'Please enter a valid email address.';
+        errEl.style.display = 'block';
+        document.getElementById('popupEmail').focus();
+        return;
+      }
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      // ── Replace YOUR_FORM_ID with your Formspree form ID ──────────
+      // Sign up free at formspree.io → New Form → copy the ID
+      const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+      // ──────────────────────────────────────────────────────────────
+
+      if (FORM_ENDPOINT.includes('YOUR_FORM_ID')) {
+        // No backend wired yet — show success for preview/testing
+        showPopupSuccess();
+        return;
+      }
+
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ email, source: 'popup-drywall-checklist' })
+        });
+
+        if (res.ok) {
+          showPopupSuccess();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch {
+        btn.textContent = 'Try Again';
+        btn.disabled = false;
+        errEl.textContent = 'Something went wrong — please try again.';
+        errEl.style.display = 'block';
+      }
+    }
+
+    function showPopupSuccess() {
+      localStorage.setItem('bp_subscribed', '1');
+      document.getElementById('popupForm').style.display = 'none';
+      document.getElementById('popupSuccess').classList.add('visible');
     }
   </script>
 
