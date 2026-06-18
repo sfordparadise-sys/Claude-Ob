@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf /home/user/Claude-Ob/.git)",
+      "Bash(git init *)",
+      "Bash(git remote *)"
+    ]
+  }
+}
