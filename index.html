@@ -895,6 +895,144 @@
       color: var(--gray);
     }
 
+    /* ─── RELEASE BAND ───────────────────────────── */
+    .release-band {
+      background: linear-gradient(135deg, #0f1824 0%, #111a28 100%);
+      border: 1px solid rgba(62,106,151,0.35);
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .release-band::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--blue);
+    }
+
+    .release-text {
+      padding: 48px 48px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .release-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      background: var(--blue);
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .release-text h3 {
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .release-tagline {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: 'Barlow Condensed', sans-serif;
+      margin-bottom: 14px;
+    }
+
+    .release-text > p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .release-stations {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+      margin-bottom: 28px;
+    }
+
+    .release-stations li {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .release-stations li span.stn {
+      color: var(--amber);
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      min-width: 36px;
+    }
+
+    .release-ctas {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .release-bonus {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .release-visual {
+      overflow: hidden;
+      position: relative;
+      min-height: 340px;
+    }
+
+    .release-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left center;
+      display: block;
+    }
+
+    .product-badge.coming {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.55);
+    }
+
+    @media (max-width: 768px) {
+      .release-band { grid-template-columns: 1fr; }
+      .release-visual { display: none; }
+      .release-text { padding: 36px 28px; }
+      .release-stations { grid-template-columns: 1fr; }
+    }
+
     /* ─── PRINCIPLES ──────────────────────────────── */
     .principles-grid {
       display: grid;
@@ -1970,6 +2108,36 @@ ml('account', '2448027');
         </div>
       </div>
 
+      <!-- ── Available Now: Pre-Drywall Inspection Checklist ── -->
+      <div class="release-band" role="region" aria-label="Available now: Pre-Drywall Inspection Checklist">
+        <div class="release-text">
+          <span class="release-badge">Available Now · Free</span>
+          <h3>Pre-Drywall Inspection<br><em>Checklist</em></h3>
+          <p class="release-tagline">Run the walk from your phone or pad.</p>
+          <p>
+            The pre-insulation sign-off system for low-rise residential builds. 6 stations, 3 inspection passes, 1 consolidated register. Catch the misses before board hides them.
+          </p>
+          <ul class="release-stations" role="list">
+            <li><span class="stn">100</span> Structure &amp; Framing Integrity</li>
+            <li><span class="stn">200</span> Mechanical Rough-Ins</li>
+            <li><span class="stn">300</span> Backing &amp; Blocking Register</li>
+            <li><span class="stn">400</span> Fire Separation &amp; Life Safety</li>
+            <li><span class="stn">500</span> Inspection Readiness</li>
+            <li><span class="stn">GATE</span> Drywall Release Authorization</li>
+          </ul>
+          <div class="release-ctas">
+            <button class="btn-primary" onclick="openLeadPopup()">
+              Get the Free Checklist
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <span class="release-bonus">+ Bonus: 25 Drywall Killers</span>
+          </div>
+        </div>
+        <div class="release-visual" aria-hidden="true">
+          <img src="images/checklist-tablet.png" alt="">
+        </div>
+      </div>
+
       <div class="products-grid">
 
         <div class="product-card featured">
@@ -1999,19 +2167,20 @@ ml('account', '2448027');
         </div>
 
         <div class="product-card">
-          <span class="product-badge free">Free</span>
+          <span class="product-badge free">Free · Bonus</span>
           <div class="product-icon" aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
           <h3>The 25 Drywall Killers</h3>
-          <p>The pre-drywall field checklist. Walk it before insulation, walk it again before board — and catch the misses that cause removals, callbacks, and Tarion conversations.</p>
+          <p>The rough-in, mechanical, framing, and extras misses that get hidden behind board — then cost you a removal, a callback, or a warranty claim. Included free with the Pre-Drywall Checklist.</p>
           <div class="product-meta">
-            <span class="product-price">Free Checklist</span>
-            <span class="product-tag">Pre-Drywall</span>
+            <span class="product-price">Free</span>
+            <span class="product-tag">Bonus Included</span>
           </div>
         </div>
 
         <div class="product-card">
+          <span class="product-badge coming">Coming Soon</span>
           <div class="product-icon" aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
           </div>
@@ -2024,6 +2193,7 @@ ml('account', '2448027');
         </div>
 
         <div class="product-card">
+          <span class="product-badge coming">Coming Soon</span>
           <div class="product-icon" aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
@@ -2036,6 +2206,7 @@ ml('account', '2448027');
         </div>
 
         <div class="product-card">
+          <span class="product-badge coming">Coming Soon</span>
           <div class="product-icon" aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
