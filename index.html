@@ -2501,28 +2501,30 @@ ml('account', '2448027');
             </li>
           </ul>
 
-          <form id="popupForm" onsubmit="handlePopupSubmit(event)" novalidate>
+          <form id="popupForm">
             <div class="popup-field">
               <input
                 type="email"
                 id="popupEmail"
                 name="email"
+                data-fs-field
                 placeholder="your@email.com"
                 required
                 autocomplete="email"
                 aria-label="Your email address"
               >
-              <button type="submit" class="btn-primary" id="popupSubmitBtn">
+              <button type="submit" class="btn-primary" data-fs-submit-btn>
                 Send It to Me
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </button>
             </div>
-            <p class="popup-error-msg" id="popupError" role="alert"></p>
+            <span data-fs-error="email" class="popup-error-msg"></span>
+            <span data-fs-error class="popup-error-msg"></span>
             <p class="popup-fine">Free. No spam. Unsubscribe any time.</p>
           </form>
 
-          <!-- Success state -->
-          <div class="popup-success" id="popupSuccess" aria-live="polite">
+          <!-- Success state: shown by @formspree/ajax on submission -->
+          <div class="popup-success" id="popupSuccess" data-fs-success aria-live="polite">
             <div class="popup-success-check" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
@@ -2565,21 +2567,6 @@ ml('account', '2448027');
         btn.setAttribute('aria-expanded', 'false');
       }
     });
-
-    function handleSubmit(e) {
-      e.preventDefault();
-      const input = e.target.querySelector('input');
-      const btn = e.target.querySelector('button');
-      if (!input.value || !input.validity.valid) {
-        input.focus();
-        return;
-      }
-      btn.textContent = "You're In!";
-      btn.disabled = true;
-      input.disabled = true;
-      input.value = '';
-      input.placeholder = 'Check your inbox for the checklist.';
-    }
 
     /* ─── LEAD MAGNET POPUP ────────────────────── */
     (function() {
@@ -2642,62 +2629,20 @@ ml('account', '2448027');
       });
     })();
 
-    async function handlePopupSubmit(e) {
-      e.preventDefault();
-      const email   = document.getElementById('popupEmail').value.trim();
-      const btn     = document.getElementById('popupSubmitBtn');
-      const errEl   = document.getElementById('popupError');
-
-      errEl.style.display = 'none';
-      errEl.textContent = '';
-
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        errEl.textContent = 'Please enter a valid email address.';
-        errEl.style.display = 'block';
-        document.getElementById('popupEmail').focus();
-        return;
+    // Set bp_subscribed when Formspree shows the success state
+    new MutationObserver(function() {
+      if (document.getElementById('popupSuccess').style.display !== 'none') {
+        localStorage.setItem('bp_subscribed', '1');
       }
-
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
-
-      // ── Replace YOUR_FORM_ID with your Formspree form ID ──────────
-      // Sign up free at formspree.io → New Form → copy the ID
-      const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-      // ──────────────────────────────────────────────────────────────
-
-      if (FORM_ENDPOINT.includes('YOUR_FORM_ID')) {
-        // No backend wired yet — show success for preview/testing
-        showPopupSuccess();
-        return;
-      }
-
-      try {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ email, source: 'popup-drywall-checklist' })
-        });
-
-        if (res.ok) {
-          showPopupSuccess();
-        } else {
-          throw new Error('Submission failed');
-        }
-      } catch {
-        btn.textContent = 'Try Again';
-        btn.disabled = false;
-        errEl.textContent = 'Something went wrong — please try again.';
-        errEl.style.display = 'block';
-      }
-    }
-
-    function showPopupSuccess() {
-      localStorage.setItem('bp_subscribed', '1');
-      document.getElementById('popupForm').style.display = 'none';
-      document.getElementById('popupSuccess').classList.add('visible');
-    }
+    }).observe(document.getElementById('popupSuccess'), { attributes: true, attributeFilter: ['style'] });
   </script>
+
+  <!-- Formspree Ajax -->
+  <script>
+    window.formspree = window.formspree || function() { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#popupForm', formId: 'xzdqlgal' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
