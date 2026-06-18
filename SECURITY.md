@@ -3,15 +3,13 @@
 ## Supported Versions
 
 | Version | Supported |
-|---------|-----------|
-| Latest  | ✅ Yes    |
+|---------|----------|
+| Latest  | Yes    |
 
 ## Reporting a Vulnerability
 
 If you discover a security vulnerability in Agent-Reach, please report 
-it responsibly by using GitHub's private security advisory feature:
-
-👉 **[Report a vulnerability](https://github.com/Panniantong/Agent-Reach/security/advisories/new)**
+it responsibly by using GitHub's private security advisory feature.
 
 Please do NOT open a public GitHub issue for security vulnerabilities.
 
