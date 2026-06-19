@@ -8,6 +8,7 @@
   <meta property="og:title" content="BuilderPilot — Field Systems for Production Residential Construction">
   <meta property="og:description" content="Field-tested tools, reporting systems, and guides for residential site supervisors and builders.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://sfordparadise-sys.github.io/Claude-Ob/images/stephen-site.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -148,6 +149,7 @@
       color: var(--gray-lt);
       text-decoration: none;
       transition: color 0.2s;
+      cursor: pointer;
     }
 
     .nav-links a:hover { color: var(--white); }
@@ -1441,6 +1443,7 @@
       justify-content: center;
       color: var(--gray);
       text-decoration: none;
+      cursor: pointer;
       transition: background 0.2s, color 0.2s;
     }
 
@@ -1532,6 +1535,9 @@
       .hero-content { padding: 96px 0 64px; }
       .principle-card { padding: 32px 24px; }
     }
+
+    .skip-link { position:absolute; top:-48px; left:16px; background:var(--amber); color:var(--black); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:14px; padding:10px 18px; border-radius:0 0 6px 6px; z-index:200; transition:top 0.2s; text-decoration:none; }
+    .skip-link:focus { top:0; outline:2px solid var(--amber-dk); }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1807,6 +1813,8 @@ ml('account', '2448027');
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ─── NAV ──────────────────────────────────── -->
   <nav id="navbar">
     <div class="nav-inner">
@@ -1846,7 +1854,7 @@ ml('account', '2448027');
   </nav>
 
   <!-- ─── HERO ──────────────────────────────────── -->
-  <section class="hero">
+  <section class="hero" id="main-content">
     <div class="hero-photo" aria-hidden="true"></div>
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-bg" aria-hidden="true"></div>
@@ -2136,7 +2144,7 @@ ml('account', '2448027');
           </div>
         </div>
         <div class="release-visual" aria-hidden="true">
-          <img src="images/checklist-tablet.png" alt="">
+          <img src="images/checklist-tablet.png" alt="BuilderPilot Pre-Drywall Inspection Checklist on tablet — Backing and Blocking Register view">
         </div>
       </div>
 

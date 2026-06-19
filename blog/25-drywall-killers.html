@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The 25 Drywall Killers — BuilderPilot</title>
   <meta name="description" content="The mistakes that show up on Tarion warranty claims and final inspection reports year after year. Learn them before they find you.">
+  <meta property="og:title" content="The 25 Drywall Killers — BuilderPilot">
+  <meta property="og:description" content="The deficiencies that show up on Tarion warranty claims year after year. Learn them before they find you.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sfordparadise-sys.github.io/Claude-Ob/images/stephen-site.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -68,9 +72,15 @@
     .footer-bottom p{font-size:13px;color:var(--gray);}
     .footer-disclaimer{margin-top:20px;font-size:12px;color:rgba(148,163,184,0.5);line-height:1.7;}
     @media(max-width:640px){.nav-links,.btn-primary.nav-cta-desktop{display:none;}.hamburger{display:flex;}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}}
+    .skip-link{position:absolute;top:-48px;left:16px;background:var(--amber);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;padding:10px 18px;border-radius:0 0 6px 6px;z-index:200;transition:top 0.2s;text-decoration:none;}
+    .skip-link:focus{top:0;outline:2px solid var(--amber-dk);}
+    .nav-links a,.footer-col a,.social-links a,.back-link{cursor:pointer;}
   </style>
 </head>
 <body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <nav id="navbar">
     <div class="nav-inner">
@@ -82,6 +92,7 @@
         <li><a href="../index.html#system">The System</a></li>
         <li><a href="../index.html#products">Field Guides</a></li>
         <li><a href="../index.html#principles">The Rules</a></li>
+        <li><a href="../index.html#who">Who It's For</a></li>
         <li><a href="../mentorship.html">Mentorship</a></li>
         <li><a href="index.html" aria-current="page">Blog</a></li>
       </ul>
@@ -94,12 +105,14 @@
   <nav class="mobile-nav" id="mobile-nav">
     <a href="../index.html#system" onclick="closeMobileNav()">The System</a>
     <a href="../index.html#products" onclick="closeMobileNav()">Field Guides</a>
+    <a href="../index.html#principles" onclick="closeMobileNav()">The Rules</a>
+    <a href="../index.html#who" onclick="closeMobileNav()">Who It's For</a>
     <a href="../mentorship.html" onclick="closeMobileNav()">Mentorship</a>
     <a href="index.html" onclick="closeMobileNav()">Blog</a>
     <a href="../index.html#access" class="btn-primary" onclick="closeMobileNav()">Get the Guides</a>
   </nav>
 
-  <header class="post-hero">
+  <header class="post-hero" id="main-content">
     <div class="container">
       <a href="index.html" class="back-link">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
