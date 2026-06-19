@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — BuilderPilot Field Notes</title>
+  <meta name="description" content="Practical field notes for Ontario residential site supervisors and builders. Inspections, locates, Tarion, daily systems — written from real job sites.">
+  <meta property="og:title" content="Blog — BuilderPilot Field Notes">
+  <meta property="og:description" content="Practical field notes for Ontario residential site supervisors and builders.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #16191F;
+      --navy:    #2B4C6F;
+      --blue:    #3E6A97;
+      --amber:   #F2A33C;
+      --amber-dk:#D4891E;
+      --white:   #FFFFFF;
+      --gray:    #94A3B8;
+      --gray-lt: #CBD5E1;
+      --surface: #1E2530;
+      --surface2:#252D3A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    em { font-style: normal; color: var(--amber); }
+
+    .label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── NAV ─────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 0 24px;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(22, 25, 31, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      height: 64px;
+      gap: 32px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-icon {
+      width: 34px; height: 34px;
+      background: var(--amber);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: var(--black);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo-icon span em { color: var(--black); }
+
+    .nav-wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.01em;
+      color: var(--white);
+    }
+
+    .nav-wordmark em { color: var(--amber); }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      color: var(--gray);
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] { color: var(--white); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover { background: var(--amber-dk); }
+
+    .nav-cta-desktop { flex-shrink: 0; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      margin-left: auto;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(22,25,31,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-direction: column;
+      padding: 12px 24px 20px;
+      z-index: 49;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .mobile-nav a:last-child { border-bottom: none; margin-top: 8px; }
+    .mobile-nav a:hover { color: var(--white); }
+
+    /* ─── PAGE HERO ───────────────────────────── */
+    .page-hero {
+      padding: 140px 0 72px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--black) 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .page-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .page-hero-eyebrow-line {
+      width: 32px;
+      height: 2px;
+      background: var(--amber);
+    }
+
+    .page-hero h1 {
+      font-size: clamp(48px, 7vw, 80px);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .page-hero p {
+      font-size: 18px;
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* ─── BLOG GRID ──────────────────────────── */
+    .blog-section {
+      padding: 80px 0 100px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .blog-card:hover {
+      border-color: rgba(242,163,60,0.35);
+      transform: translateY(-3px);
+    }
+
+    .blog-card-accent {
+      height: 3px;
+      background: var(--blue);
+    }
+
+    .blog-card-accent.amber { background: var(--amber); }
+    .blog-card-accent.navy { background: var(--navy); }
+
+    .blog-card-body {
+      padding: 28px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .blog-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .blog-card-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      background: rgba(242,163,60,0.12);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .blog-card-time {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .blog-card h2 {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .blog-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .blog-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--amber);
+      transition: gap 0.2s;
+    }
+
+    .blog-card:hover .blog-card-link { gap: 10px; }
+
+    /* ─── FOOTER ─────────────────────────────── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 60px 0 32px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo-icon {
+      width: 34px; height: 34px;
+      background: var(--amber);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-logo-icon span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: var(--black);
+      letter-spacing: -0.02em;
+    }
+
+    .footer-logo-icon span em { color: var(--black); }
+
+    .footer-logo-wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--white);
+    }
+
+    .footer-logo-wordmark em { color: var(--amber); }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-lt);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      font-size: 14px;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-bottom p { font-size: 13px; color: var(--gray); }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .social-links a {
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    .social-links a:hover { color: var(--amber); }
+
+    .footer-disclaimer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: rgba(148,163,184,0.55);
+      line-height: 1.7;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 900px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links, .nav-cta-desktop { display: none; }
+      .hamburger { display: flex; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="BuilderPilot home">
+        <div class="nav-logo-icon"><span>B<em>P</em></span></div>
+        <span class="nav-wordmark">Builder<em>Pilot</em></span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html#system">The System</a></li>
+        <li><a href="../index.html#products">Field Guides</a></li>
+        <li><a href="../index.html#principles">The Rules</a></li>
+        <li><a href="../index.html#who">Who It's For</a></li>
+        <li><a href="../mentorship.html">Mentorship</a></li>
+        <li><a href="index.html" aria-current="page">Blog</a></li>
+      </ul>
+
+      <a href="../index.html#access" class="btn-primary nav-cta-desktop">
+        Get the Guides
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleNav(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="../index.html#system" onclick="closeMobileNav()">The System</a>
+    <a href="../index.html#products" onclick="closeMobileNav()">Field Guides</a>
+    <a href="../index.html#principles" onclick="closeMobileNav()">The Rules</a>
+    <a href="../index.html#who" onclick="closeMobileNav()">Who It's For</a>
+    <a href="../mentorship.html" onclick="closeMobileNav()">Mentorship</a>
+    <a href="index.html" onclick="closeMobileNav()">Blog</a>
+    <a href="../index.html#access" class="btn-primary" onclick="closeMobileNav()">Get the Guides</a>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────── -->
+  <header class="page-hero">
+    <div class="container">
+      <div class="page-hero-eyebrow">
+        <div class="page-hero-eyebrow-line" aria-hidden="true"></div>
+        <span class="label">Field Notes from the Job Site</span>
+      </div>
+      <h1>The <em>Blog.</em></h1>
+      <p>Practical write-ups for Ontario residential site supervisors and builders. Inspections, locates, Tarion, daily systems — straight from the field.</p>
+    </div>
+  </header>
+
+  <!-- ─── POSTS ─────────────────────────────── -->
+  <section class="blog-section">
+    <div class="container">
+
+      <div class="blog-grid">
+
+        <!-- Post 1 -->
+        <article class="blog-card">
+          <div class="blog-card-accent amber"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="blog-card-tag">Inspections</span>
+              <span class="blog-card-time">7 min read</span>
+            </div>
+            <h2>The Pre-Drywall Inspection: What You Need to Catch Before the Walls Close</h2>
+            <p>Once the drywall goes up, everything behind it is someone's word against yours. Here's the full list of what to verify, document, and sign off on before you let a single board go up.</p>
+            <a href="pre-drywall-inspection.html" class="blog-card-link">
+              Read the post
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="blog-card">
+          <div class="blog-card-accent"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="blog-card-tag">Compliance</span>
+              <span class="blog-card-time">5 min read</span>
+            </div>
+            <h2>ON1Call Locates: Why Every Ontario Site Super Takes This Seriously</h2>
+            <p>Underground locates are mandatory by law in Ontario before any excavation. Here's what the colours mean, what your obligations are under the Occupational Health and Safety Act, and what happens when you skip the call.</p>
+            <a href="on1call-locates-ontario.html" class="blog-card-link">
+              Read the post
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="blog-card">
+          <div class="blog-card-accent navy"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="blog-card-tag">Quality</span>
+              <span class="blog-card-time">8 min read</span>
+            </div>
+            <h2>The 25 Drywall Killers: Real Mistakes That Cost Real Money</h2>
+            <p>These aren't hypotheticals. They're the deficiencies that show up on Tarion warranty claims, PDO punch lists, and final inspection reports — year after year, site after site. Learn them before they learn you.</p>
+            <a href="25-drywall-killers.html" class="blog-card-link">
+              Read the post
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Post 4 -->
+        <article class="blog-card">
+          <div class="blog-card-accent amber"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="blog-card-tag">Tarion</span>
+              <span class="blog-card-time">6 min read</span>
+            </div>
+            <h2>Tarion and the PDO: What Site Supervisors Actually Need to Know</h2>
+            <p>The Pre-Delivery Orientation is the moment your warranty clock starts ticking. Know what's required, what to document, what purchasers are going to flag, and how your sign-offs protect you down the road.</p>
+            <a href="tarion-pdo-reporting.html" class="blog-card-link">
+              Read the post
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Post 5 -->
+        <article class="blog-card">
+          <div class="blog-card-accent"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="blog-card-tag">Daily System</span>
+              <span class="blog-card-time">6 min read</span>
+            </div>
+            <h2>Walk. Log. Recap. Track. The Field System That Keeps You Ahead</h2>
+            <p>Most site chaos is not a trade problem. It's a communication problem. Four simple disciplines — done daily, without exception — are the difference between running your site and your site running you.</p>
+            <a href="walk-log-recap-track.html" class="blog-card-link">
+              Read the post
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Post 6 -->
+        <article class="blog-card">
+          <div class="blog-card-accent navy"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="blog-card-tag">Documentation</span>
+              <span class="blog-card-time">5 min read</span>
+            </div>
+            <h2>The Backing &amp; Blocking Register: One Checklist That Prevents a Month of Callbacks</h2>
+            <p>Grab bar backing. TV mounts. Medicine cabinet blocking. Future handrails. All invisible once the drywall goes up — and every single one becomes a warranty claim if they're missed. Here's the register that closes that gap.</p>
+            <a href="backing-blocking-register.html" class="blog-card-link">
+              Read the post
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <a href="../index.html" class="footer-logo" aria-label="BuilderPilot home">
+            <div class="footer-logo-icon" aria-hidden="true"><span>B<em>P</em></span></div>
+            <span class="footer-logo-wordmark">Builder<em>Pilot</em></span>
+          </a>
+          <p>Field systems for production residential construction. Tools, reporting systems, and guides for low-rise residential site superintendents and builders.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Field Guides</h5>
+          <ul role="list">
+            <li><a href="../index.html#products">Site Supervisor Playbook</a></li>
+            <li><a href="../index.html#products">New Super Survival Guide</a></li>
+            <li><a href="../index.html#products">AI Reporting Kit</a></li>
+            <li><a href="../index.html#products">The 25 Drywall Killers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <ul role="list">
+            <li><a href="../index.html#system">The System</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#principles">The Rules</a></li>
+            <li><a href="../mentorship.html">Mentorship</a></li>
+            <li><a href="index.html">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Get the Guides</h5>
+          <ul role="list">
+            <li><a href="https://builderpilot.gumroad.com" rel="noopener noreferrer" target="_blank">Gumroad Store</a></li>
+            <li><a href="https://instagram.com/builderpilotguide" rel="noopener noreferrer" target="_blank">@builderpilotguide</a></li>
+            <li><a href="../index.html#access">Free Checklist</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 <em>BuilderPilot</em> · Stephen Ford · Field Systems for Production Residential Construction.</p>
+        <div class="social-links" role="list" aria-label="Social media links">
+          <a href="https://instagram.com/builderpilotguide" aria-label="BuilderPilot on Instagram" rel="noopener noreferrer" target="_blank" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <p class="footer-disclaimer">
+        BuilderPilot is an independent educational resource. References to regulations (OHSA, the Ontario Building Code, Tarion, the Construction Act) are general — always confirm current requirements with the governing authority. Nothing here is legal advice.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', function() {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+
+      window.toggleNav = function(btn) {
+        var nav = document.getElementById('mobile-nav');
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+      };
+
+      window.closeMobileNav = function() {
+        document.getElementById('mobile-nav').classList.remove('open');
+        var btn = document.querySelector('.hamburger');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      };
+    })();
+  </script>
+
+</body>
+</html>

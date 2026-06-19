@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walk. Log. Recap. Track. — BuilderPilot</title>
+  <meta name="description" content="Four daily disciplines that keep Ontario site supervisors ahead of the chaos. The field system that turns reactive site management into proactive control.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--black:#16191F;--navy:#2B4C6F;--blue:#3E6A97;--amber:#F2A33C;--amber-dk:#D4891E;--white:#FFFFFF;--gray:#94A3B8;--gray-lt:#CBD5E1;--surface:#1E2530;--surface2:#252D3A;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Barlow',sans-serif;background:var(--black);color:var(--white);font-size:16px;line-height:1.6;overflow-x:hidden;}
+    h1,h2,h3,h4{font-family:'Barlow Condensed',sans-serif;line-height:1.05;letter-spacing:-0.01em;}
+    em{font-style:normal;color:var(--amber);}
+    a{color:inherit;text-decoration:none;}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+    .label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);}
+    nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:0 24px;transition:background 0.3s;}
+    nav.scrolled{background:rgba(22,25,31,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:64px;gap:32px;}
+    .nav-logo{display:flex;align-items:center;gap:10px;}
+    .nav-logo-icon{width:34px;height:34px;background:var(--amber);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+    .nav-logo-icon span{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;color:var(--black);letter-spacing:-0.02em;}
+    .nav-logo-icon span em{color:var(--black);}
+    .nav-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--white);}
+    .nav-wordmark em{color:var(--amber);}
+    .nav-links{display:flex;list-style:none;gap:28px;margin-left:auto;}
+    .nav-links a{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:var(--gray);transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--white);}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--amber);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:10px 20px;border-radius:6px;border:none;cursor:pointer;transition:background 0.2s;white-space:nowrap;}
+    .btn-primary:hover{background:var(--amber-dk);}
+    .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:auto;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;}
+    .mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(22,25,31,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);flex-direction:column;padding:12px 24px 20px;z-index:49;}
+    .mobile-nav.open{display:flex;}
+    .mobile-nav a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray);}
+    .mobile-nav a:last-child{border-bottom:none;margin-top:8px;}
+    .post-hero{padding:140px 0 64px;background:linear-gradient(180deg,var(--surface) 0%,var(--black) 100%);border-bottom:1px solid rgba(255,255,255,0.06);}
+    .post-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+    .post-tag{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);background:rgba(242,163,60,0.12);padding:3px 8px;border-radius:4px;}
+    .post-time{font-size:13px;color:var(--gray);}
+    .post-hero h1{font-size:clamp(36px,6vw,64px);font-weight:900;color:var(--white);max-width:800px;margin-bottom:20px;}
+    .post-hero p.lead{font-size:18px;color:var(--gray);max-width:640px;line-height:1.65;}
+    .post-body{max-width:740px;margin:0 auto;padding:72px 24px 100px;}
+    .post-body h2{font-size:28px;font-weight:800;color:var(--white);margin:48px 0 16px;}
+    .post-body h3{font-size:20px;font-weight:700;color:var(--amber);margin:32px 0 12px;}
+    .post-body p{font-size:16px;color:var(--gray-lt);line-height:1.75;margin-bottom:20px;}
+    .post-body ul,.post-body ol{padding-left:24px;margin-bottom:20px;}
+    .post-body li{font-size:16px;color:var(--gray-lt);line-height:1.7;margin-bottom:8px;}
+    .post-body strong{color:var(--white);font-weight:600;}
+    .callout{background:var(--surface);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:20px 24px;margin:32px 0;}
+    .callout p{margin:0;font-size:15px;color:var(--gray-lt);}
+    .four-steps{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0;}
+    .step-card{background:var(--surface);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:24px;}
+    .step-number{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:40px;color:var(--amber);opacity:0.3;line-height:1;margin-bottom:8px;}
+    .step-card h4{font-size:20px;font-weight:800;color:var(--white);margin-bottom:8px;}
+    .step-card p{font-size:14px;color:var(--gray);line-height:1.6;margin:0;}
+    .post-cta{background:var(--surface);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:40px;margin:64px auto;max-width:740px;text-align:center;}
+    .post-cta h3{font-size:26px;font-weight:800;margin-bottom:12px;}
+    .post-cta p{font-size:15px;color:var(--gray);margin-bottom:24px;}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray);margin-bottom:32px;transition:color 0.2s;}
+    .back-link:hover{color:var(--amber);}
+    footer{background:var(--surface);border-top:1px solid rgba(255,255,255,0.06);padding:48px 0 28px;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+    .footer-bottom p{font-size:13px;color:var(--gray);}
+    .footer-disclaimer{margin-top:20px;font-size:12px;color:rgba(148,163,184,0.5);line-height:1.7;}
+    @media(max-width:640px){.nav-links,.btn-primary.nav-cta-desktop{display:none;}.hamburger{display:flex;}.four-steps{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="BuilderPilot home">
+        <div class="nav-logo-icon"><span>B<em>P</em></span></div>
+        <span class="nav-wordmark">Builder<em>Pilot</em></span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html#system">The System</a></li>
+        <li><a href="../index.html#products">Field Guides</a></li>
+        <li><a href="../index.html#principles">The Rules</a></li>
+        <li><a href="../mentorship.html">Mentorship</a></li>
+        <li><a href="index.html" aria-current="page">Blog</a></li>
+      </ul>
+      <a href="../index.html#access" class="btn-primary nav-cta-desktop">Get the Guides
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="../index.html#system" onclick="closeMobileNav()">The System</a>
+    <a href="../index.html#products" onclick="closeMobileNav()">Field Guides</a>
+    <a href="../mentorship.html" onclick="closeMobileNav()">Mentorship</a>
+    <a href="index.html" onclick="closeMobileNav()">Blog</a>
+    <a href="../index.html#access" class="btn-primary" onclick="closeMobileNav()">Get the Guides</a>
+  </nav>
+
+  <header class="post-hero">
+    <div class="container">
+      <a href="index.html" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        All posts
+      </a>
+      <div class="post-meta">
+        <span class="post-tag">Daily System</span>
+        <span class="post-time">6 min read · June 2026</span>
+      </div>
+      <h1>Walk. Log. Recap. Track. The Field System That Keeps You Ahead</h1>
+      <p class="lead">Most site chaos is not a trade problem. It's a communication problem. Four disciplines — done daily, without exception — are the difference between running your site and your site running you.</p>
+    </div>
+  </header>
+
+  <article class="post-body">
+
+    <p>Ask any experienced site super what separates a site that runs clean from one that's always on fire, and the answer is rarely about trade quality or schedule pressure. It's about information. Who has it, when they got it, and what they did with it.</p>
+
+    <p>The site supervisor's job is fundamentally an information management job. You are the node through which everything flows — what the trades need, what the inspectors expect, what the builder is being told, and what the purchaser will eventually experience. When that information flows well, the site runs. When it breaks down, everything breaks down.</p>
+
+    <p>Walk. Log. Recap. Track. is a four-part daily system built for that reality. It's not complicated. That's the point.</p>
+
+    <div class="four-steps">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <h4>Walk</h4>
+        <p>Start every morning with a site walk. Every active unit. No exceptions, no shortcuts.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <h4>Log</h4>
+        <p>Write down what you see. Photo it. Date it. Name it. If it isn't written, it didn't happen.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <h4>Recap</h4>
+        <p>Close every day by communicating what happened — to trades, to your builder, to anyone who needs to know.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">04</div>
+        <h4>Track</h4>
+        <p>Maintain a live list of every open item on the site. If it's not on the list, it doesn't get done.</p>
+      </div>
+    </div>
+
+    <h2>Walk</h2>
+
+    <p>The morning walk is not a stroll. It's a systematic inspection of every active unit, in sequence, with eyes on what happened since your last visit and what needs to happen today. It takes whatever time it takes — on a large production site with 30 active units, that might be 90 minutes. Do it anyway.</p>
+
+    <p>What you're looking for: work that was supposed to happen and didn't; work that happened incorrectly; safety conditions that weren't there yesterday; materials that have been delivered or damaged; progress that tells you whether the schedule is tracking.</p>
+
+    <p>The morning walk gives you the information you need to run the rest of the day proactively instead of reactively. Without it, you're waiting for problems to find you. With it, you find them first.</p>
+
+    <div class="callout">
+      <p><strong>Don't carry it in your head.</strong> Your phone is in your pocket. Take photos of anything that's wrong, anything outstanding, anything you'll need to reference later. Storage is free. Memory is not reliable.</p>
+    </div>
+
+    <h2>Log</h2>
+
+    <p>The log is your record. It is not for the builder. It is not for Tarion. It is for you — it's what you need when someone tells you a problem started six weeks ago and you need to know what the site looked like six weeks ago.</p>
+
+    <p>What goes in the log: everything you observed on the walk, every conversation you had with a trade about a problem or a change, every instruction you gave, every instruction you received, every inspection that was completed, every delivery that arrived or didn't. The date. The unit. The specifics.</p>
+
+    <p>Format doesn't matter as much as consistency. Some site supers use a paper site diary. Others use a phone note or a voice memo that gets transcribed. What matters is that it's daily, it's detailed, and it's searchable when you need it months later.</p>
+
+    <p>The log is your CYA. It's the record that protects you when disputes arise about what was known, when, and by whom.</p>
+
+    <h2>Recap</h2>
+
+    <p>End of day communication. Not a meeting — a message. What happened today. What didn't. What's blocking tomorrow. Who needs to know what before 7am.</p>
+
+    <p>The recap serves two purposes. First, it closes the information loop with the people who need to know: your builder, your trades foremen, your coordinator. Second, it forces you to process the day. You can't write a coherent recap without having thought through what actually happened — and that synthesis is where you catch things you might otherwise have let slip.</p>
+
+    <p>The recap doesn't need to be long. Three to five bullet points of what moved, what didn't, and what tomorrow looks like is enough. What it needs to be is consistent and timely. A recap sent at 4:30pm is more useful than the same recap sent at 9pm.</p>
+
+    <h2>Track</h2>
+
+    <p>The deficiency list, the open items register, the holdback list — call it whatever your site calls it. The point is a single, live document that contains every open item on your site at any given moment.</p>
+
+    <p>Every item identified on the walk goes on the list. Every item discussed in a conversation that requires action goes on the list. Every commitment made by a trade, a supplier, or a coordinator goes on the list, with the committed date. Nothing lives only in your head or in a text thread.</p>
+
+    <p>Items come off the list when they're resolved and you've verified the resolution yourself — not when you've been told they're resolved. There is a difference.</p>
+
+    <div class="callout">
+      <p><strong>Review the list every morning before the walk.</strong> It tells you what to look for. It tells you what commitments were supposed to be kept overnight. It keeps you from losing track of the slow-moving items that fall through the cracks when you're running fast.</p>
+    </div>
+
+    <h2>Why This Works</h2>
+
+    <p>None of this is complicated. The reason most site supervisors don't do it consistently isn't because they don't know the value — it's because the morning is always busy, the recap gets bumped when something runs late, and the list grows faster than it shrinks.</p>
+
+    <p>The discipline is the system. These four steps don't work on the days when everything goes smoothly and you remember everything. They work on the Thursday afternoon when a Tarion inspector asks about a specific deficiency that was supposedly repaired six weeks ago, and you have the log entry, the photo, and the date it was closed out. That's when the system pays back every minute you put into it.</p>
+
+    <p>Walk. Log. Recap. Track. Every day. Not most days. Every day.</p>
+
+  </article>
+
+  <div class="post-cta container">
+    <span class="label">Free Download</span>
+    <h3>Pre-Drywall Inspection Checklist</h3>
+    <p>A field-ready inspection tool — formatted for the walk, the log, and the sign-off. Free with your email.</p>
+    <a href="../index.html#access" class="btn-primary">Download Free
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 <em>BuilderPilot</em> · Stephen Ford</p>
+        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber);">← Back to Blog</a>
+      </div>
+      <p class="footer-disclaimer">BuilderPilot is an independent educational resource. Nothing here is legal advice.</p>
+    </div>
+  </footer>
+
+  <script>
+    var nb=document.getElementById('navbar');
+    window.addEventListener('scroll',function(){nb.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+    window.toggleNav=function(b){var n=document.getElementById('mobile-nav');var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);};
+    window.closeMobileNav=function(){document.getElementById('mobile-nav').classList.remove('open');};
+  </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Pre-Drywall Inspection — BuilderPilot</title>
+  <meta name="description" content="What every Ontario site supervisor needs to verify before drywall goes up. A practical breakdown of the pre-drywall inspection from 20+ years in the field.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:#16191F; --navy:#2B4C6F; --blue:#3E6A97;
+      --amber:#F2A33C; --amber-dk:#D4891E; --white:#FFFFFF;
+      --gray:#94A3B8; --gray-lt:#CBD5E1; --surface:#1E2530; --surface2:#252D3A;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Barlow',sans-serif; background:var(--black); color:var(--white); font-size:16px; line-height:1.6; overflow-x:hidden; }
+    h1,h2,h3,h4 { font-family:'Barlow Condensed',sans-serif; line-height:1.05; letter-spacing:-0.01em; }
+    em { font-style:normal; color:var(--amber); }
+    a { color:inherit; text-decoration:none; }
+    .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+    .label { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--amber); }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:50; padding:0 24px; transition:background 0.3s; }
+    nav.scrolled { background:rgba(22,25,31,0.92); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.06); }
+    .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:64px; gap:32px; }
+    .nav-logo { display:flex; align-items:center; gap:10px; }
+    .nav-logo-icon { width:34px; height:34px; background:var(--amber); border-radius:6px; display:flex; align-items:center; justify-content:center; }
+    .nav-logo-icon span { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:15px; color:var(--black); letter-spacing:-0.02em; }
+    .nav-logo-icon span em { color:var(--black); }
+    .nav-wordmark { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:18px; color:var(--white); }
+    .nav-wordmark em { color:var(--amber); }
+    .nav-links { display:flex; list-style:none; gap:28px; margin-left:auto; }
+    .nav-links a { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.04em; text-transform:uppercase; color:var(--gray); transition:color 0.2s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color:var(--white); }
+    .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--amber); color:var(--black); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; padding:10px 20px; border-radius:6px; border:none; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
+    .btn-primary:hover { background:var(--amber-dk); }
+    .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; margin-left:auto; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--white); border-radius:2px; }
+    .mobile-nav { display:none; position:fixed; top:64px; left:0; right:0; background:rgba(22,25,31,0.97); backdrop-filter:blur(16px); border-bottom:1px solid rgba(255,255,255,0.08); flex-direction:column; padding:12px 24px 20px; z-index:49; }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray); }
+    .mobile-nav a:last-child { border-bottom:none; margin-top:8px; }
+
+    /* ARTICLE HERO */
+    .post-hero { padding:140px 0 64px; background:linear-gradient(180deg,var(--surface) 0%,var(--black) 100%); border-bottom:1px solid rgba(255,255,255,0.06); }
+    .post-hero-eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+    .post-hero-eyebrow-line { width:32px; height:2px; background:var(--amber); }
+    .post-meta { display:flex; align-items:center; gap:16px; margin-bottom:24px; }
+    .post-tag { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber); background:rgba(242,163,60,0.12); padding:3px 8px; border-radius:4px; }
+    .post-time { font-size:13px; color:var(--gray); }
+    .post-hero h1 { font-size:clamp(36px,6vw,64px); font-weight:900; color:var(--white); max-width:800px; margin-bottom:20px; }
+    .post-hero p.lead { font-size:18px; color:var(--gray); max-width:640px; line-height:1.65; }
+
+    /* ARTICLE BODY */
+    .post-body { max-width:740px; margin:0 auto; padding:72px 24px 100px; }
+    .post-body h2 { font-size:28px; font-weight:800; color:var(--white); margin:48px 0 16px; }
+    .post-body h3 { font-size:20px; font-weight:700; color:var(--amber); margin:32px 0 12px; }
+    .post-body p { font-size:16px; color:var(--gray-lt); line-height:1.75; margin-bottom:20px; }
+    .post-body ul, .post-body ol { padding-left:24px; margin-bottom:20px; }
+    .post-body li { font-size:16px; color:var(--gray-lt); line-height:1.7; margin-bottom:8px; }
+    .post-body strong { color:var(--white); font-weight:600; }
+    .callout { background:var(--surface); border-left:3px solid var(--amber); border-radius:0 8px 8px 0; padding:20px 24px; margin:32px 0; }
+    .callout p { margin:0; font-size:15px; color:var(--gray-lt); }
+
+    /* CTA BAND */
+    .post-cta { background:var(--surface); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:40px; margin:64px auto; max-width:740px; text-align:center; }
+    .post-cta h3 { font-size:26px; font-weight:800; margin-bottom:12px; }
+    .post-cta p { font-size:15px; color:var(--gray); margin-bottom:24px; }
+
+    /* BACK LINK */
+    .back-link { display:inline-flex; align-items:center; gap:6px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray); margin-bottom:32px; transition:color 0.2s; }
+    .back-link:hover { color:var(--amber); }
+
+    /* FOOTER */
+    footer { background:var(--surface); border-top:1px solid rgba(255,255,255,0.06); padding:48px 0 28px; }
+    .footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+    .footer-bottom p { font-size:13px; color:var(--gray); }
+    .footer-disclaimer { margin-top:20px; font-size:12px; color:rgba(148,163,184,0.5); line-height:1.7; }
+
+    @media (max-width:640px) { .nav-links,.btn-primary.nav-cta-desktop { display:none; } .hamburger { display:flex; } }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="BuilderPilot home">
+        <div class="nav-logo-icon"><span>B<em>P</em></span></div>
+        <span class="nav-wordmark">Builder<em>Pilot</em></span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html#system">The System</a></li>
+        <li><a href="../index.html#products">Field Guides</a></li>
+        <li><a href="../index.html#principles">The Rules</a></li>
+        <li><a href="../mentorship.html">Mentorship</a></li>
+        <li><a href="index.html" aria-current="page">Blog</a></li>
+      </ul>
+      <a href="../index.html#access" class="btn-primary nav-cta-desktop">Get the Guides
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="../index.html#system" onclick="closeMobileNav()">The System</a>
+    <a href="../index.html#products" onclick="closeMobileNav()">Field Guides</a>
+    <a href="../mentorship.html" onclick="closeMobileNav()">Mentorship</a>
+    <a href="index.html" onclick="closeMobileNav()">Blog</a>
+    <a href="../index.html#access" class="btn-primary" onclick="closeMobileNav()">Get the Guides</a>
+  </nav>
+
+  <header class="post-hero">
+    <div class="container">
+      <a href="index.html" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        All posts
+      </a>
+      <div class="post-meta">
+        <span class="post-tag">Inspections</span>
+        <span class="post-time">7 min read · June 2026</span>
+      </div>
+      <h1>The Pre-Drywall Inspection: What You Need to Catch Before the Walls Close</h1>
+      <p class="lead">Once the drywall goes up, everything behind it is someone's word against yours. Here's the full breakdown — what to check, how to document it, and why this is the most consequential inspection window on any production residential build.</p>
+    </div>
+  </header>
+
+  <article class="post-body">
+
+    <p>There is no inspection on a residential build that matters more than the pre-drywall walk. Not the framing inspection. Not the final walk. Not the PDO. This one. Because once the boards go up, anything you missed becomes a mystery, a warranty claim, or a legal dispute — and you're the one who signed off.</p>
+
+    <p>Here's how to run it properly.</p>
+
+    <h2>Why This Window Is Everything</h2>
+
+    <p>Production residential builds move fast. On a busy site, the sequence from framing to drywall can compress to a matter of days. Electrical rough-in, plumbing rough-in, HVAC rough-in, insulation, vapour barrier — all of it goes behind those boards, and most of it will never be visible again for the life of the structure.</p>
+
+    <p>That makes the pre-drywall window your last legitimate access point. Not the inspector's. Not the purchaser's. Yours. The site supervisor is the person responsible for verifying that what's inside those walls is right before they close.</p>
+
+    <div class="callout">
+      <p><strong>Rule of thumb:</strong> If it's not in your pre-drywall sign-off package, it didn't happen. Courts, Tarion, and your own builder will take that position — so you should too.</p>
+    </div>
+
+    <h2>The Inspection Sequence</h2>
+
+    <h3>1. Framing Completeness</h3>
+    <p>Before you look at any rough-in, the framing has to be right. Confirm all headers are sized and bearing correctly. Check that king studs, jack studs, and cripples are in place at every opening. Look for any notched or bored studs that violate OBC clearances for structural members — trades are notorious for cutting what's in their way without thinking about load path consequences.</p>
+    <p>Squash blocks under point loads, beam pockets fully bearing, hangers installed per the engineer's schedule. Get eyes on it room by room before anything else.</p>
+
+    <h3>2. Electrical Rough-In</h3>
+    <p>Walk with the electrical inspection certificate in hand — or know where it is before you close. Your scope is to verify that the rough-in is complete to the plan: outlet locations, box heights, circuit separation at the panel, and any special requirements like dedicated kitchen circuits, bathroom GFCI positioning, and smoke/CO detector rough-ins per OBC Part 9.</p>
+    <p>Mark anything that doesn't match the electrical plan. Deviations need to be resolved before the board goes up, not discovered at the final electrical inspection when drywall has to come off.</p>
+
+    <h3>3. Plumbing Rough-In</h3>
+    <p>The plumber's pressure test certificate should be in your hands before any insulation goes in. Verify drain slopes (minimum ¼" per foot), clean-out locations, vent stack penetrations through the roof (with proper flashing), and that all tub and shower drain positions match the fixture schedule. Check water supply stub-out heights — they need to hit the right location for each fixture, and this is where rough plumbing errors become very expensive drywall repairs.</p>
+
+    <h3>4. HVAC Rough-In</h3>
+    <p>Confirm duct sizing matches the mechanical schedule. Every supply and return register location should align with the floor plan. Check that flex duct connections are secure — loose flex is the leading cause of HVAC inefficiency complaints in the first year of occupancy. HRV installation and commissioning documentation should be in your package for any new build under the current OBC energy requirements.</p>
+
+    <h3>5. Backing and Blocking</h3>
+    <p>This is the one that comes back to haunt people. Every location requiring backing — grab bars, handrails, future TV mounts, medicine cabinets, toilet paper holders at accessible units, heavy lighting fixtures — needs to be in place before drywalling. If it's not on a register and signed off, it doesn't get done. See the dedicated post on the Backing & Blocking Register for how to manage this systematically.</p>
+
+    <h3>6. Insulation</h3>
+    <p>Verify depth and type against the thermal performance requirements in the permit drawings. Check batt installation quality — compressed insulation doesn't perform to its rated R-value. Look for voids at electrical boxes, around plumbing penetrations, and at rim joists. These are consistently the worst-performing areas in blower door tests and energy audits.</p>
+
+    <h3>7. Vapour Barrier</h3>
+    <p>The vapour barrier is the last thing that goes in before drywall, and it's easy to rush. Inspect every seam — they should be lapped a minimum 150mm and sealed with acoustical sealant or poly tape. Every penetration (electrical boxes, plumbing stacks, strapping) needs to be sealed. A bad vapour barrier creates moisture problems that won't show up for years, and when they do, you're on the hook for them.</p>
+
+    <h2>What to Document</h2>
+
+    <p>Your pre-drywall sign-off package should include:</p>
+    <ul>
+      <li>Dated photographs of each rough-in — room by room, discipline by discipline</li>
+      <li>The electrical rough-in inspection certificate</li>
+      <li>The plumbing pressure test certificate</li>
+      <li>Your backing and blocking register, signed by the framer</li>
+      <li>Any deviations from the approved drawings, with resolution notes</li>
+      <li>Your own written sign-off, dated and unit-identified</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Don't rely on verbal sign-offs.</strong> "Yeah, that's done" from a trade on a busy Friday afternoon means nothing when a Tarion claim lands two years later. Paper only.</p>
+    </div>
+
+    <h2>When to Hold the Board</h2>
+
+    <p>If any item isn't resolved, the drywall doesn't go up. That's the rule, and it has to be non-negotiable. The pressure to keep the schedule moving is real — but opening drywall for a missed backing, a mis-positioned electrical box, or an unsigned plumbing test costs ten times more in time and money than a one-day hold.</p>
+
+    <p>Call it. Hold the board. Get it right.</p>
+
+    <p>That's what the job is.</p>
+
+  </article>
+
+  <div class="post-cta container">
+    <span class="label">Free Download</span>
+    <h3>Get the Pre-Drywall Inspection Checklist</h3>
+    <p>A field-ready checklist covering every rough-in discipline — formatted for one unit, one walk, one sign-off. Free with your email.</p>
+    <a href="../index.html#access" class="btn-primary">Download Free
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 <em>BuilderPilot</em> · Stephen Ford</p>
+        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber);">← Back to Blog</a>
+      </div>
+      <p class="footer-disclaimer">BuilderPilot is an independent educational resource. References to OBC, Tarion, and OHSA are general — confirm current requirements with the governing authority. Nothing here is legal advice.</p>
+    </div>
+  </footer>
+
+  <script>
+    var nb = document.getElementById('navbar');
+    window.addEventListener('scroll', function(){ nb.classList.toggle('scrolled', window.scrollY > 20); }, { passive:true });
+    window.toggleNav = function(b){ var n=document.getElementById('mobile-nav'); var o=n.classList.toggle('open'); b.setAttribute('aria-expanded',o); };
+    window.closeMobileNav = function(){ document.getElementById('mobile-nav').classList.remove('open'); };
+  </script>
+</body>
+</html>

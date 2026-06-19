@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ON1Call Locates — BuilderPilot</title>
+  <meta name="description" content="Underground locates are mandatory in Ontario before any excavation. What site supers need to know about ON1Call, colours, OHSA obligations, and what happens if you skip the call.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--black:#16191F;--navy:#2B4C6F;--blue:#3E6A97;--amber:#F2A33C;--amber-dk:#D4891E;--white:#FFFFFF;--gray:#94A3B8;--gray-lt:#CBD5E1;--surface:#1E2530;--surface2:#252D3A;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Barlow',sans-serif;background:var(--black);color:var(--white);font-size:16px;line-height:1.6;overflow-x:hidden;}
+    h1,h2,h3,h4{font-family:'Barlow Condensed',sans-serif;line-height:1.05;letter-spacing:-0.01em;}
+    em{font-style:normal;color:var(--amber);}
+    a{color:inherit;text-decoration:none;}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+    .label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);}
+    nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:0 24px;transition:background 0.3s;}
+    nav.scrolled{background:rgba(22,25,31,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:64px;gap:32px;}
+    .nav-logo{display:flex;align-items:center;gap:10px;}
+    .nav-logo-icon{width:34px;height:34px;background:var(--amber);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+    .nav-logo-icon span{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;color:var(--black);letter-spacing:-0.02em;}
+    .nav-logo-icon span em{color:var(--black);}
+    .nav-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--white);}
+    .nav-wordmark em{color:var(--amber);}
+    .nav-links{display:flex;list-style:none;gap:28px;margin-left:auto;}
+    .nav-links a{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:var(--gray);transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--white);}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--amber);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:10px 20px;border-radius:6px;border:none;cursor:pointer;transition:background 0.2s;white-space:nowrap;}
+    .btn-primary:hover{background:var(--amber-dk);}
+    .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:auto;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;}
+    .mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(22,25,31,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);flex-direction:column;padding:12px 24px 20px;z-index:49;}
+    .mobile-nav.open{display:flex;}
+    .mobile-nav a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray);}
+    .mobile-nav a:last-child{border-bottom:none;margin-top:8px;}
+    .post-hero{padding:140px 0 64px;background:linear-gradient(180deg,var(--surface) 0%,var(--black) 100%);border-bottom:1px solid rgba(255,255,255,0.06);}
+    .post-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+    .post-tag{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);background:rgba(242,163,60,0.12);padding:3px 8px;border-radius:4px;}
+    .post-time{font-size:13px;color:var(--gray);}
+    .post-hero h1{font-size:clamp(36px,6vw,64px);font-weight:900;color:var(--white);max-width:800px;margin-bottom:20px;}
+    .post-hero p.lead{font-size:18px;color:var(--gray);max-width:640px;line-height:1.65;}
+    .post-body{max-width:740px;margin:0 auto;padding:72px 24px 100px;}
+    .post-body h2{font-size:28px;font-weight:800;color:var(--white);margin:48px 0 16px;}
+    .post-body h3{font-size:20px;font-weight:700;color:var(--amber);margin:32px 0 12px;}
+    .post-body p{font-size:16px;color:var(--gray-lt);line-height:1.75;margin-bottom:20px;}
+    .post-body ul,.post-body ol{padding-left:24px;margin-bottom:20px;}
+    .post-body li{font-size:16px;color:var(--gray-lt);line-height:1.7;margin-bottom:8px;}
+    .post-body strong{color:var(--white);font-weight:600;}
+    .callout{background:var(--surface);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:20px 24px;margin:32px 0;}
+    .callout p{margin:0;font-size:15px;color:var(--gray-lt);}
+    .colour-table{width:100%;border-collapse:collapse;margin:24px 0 32px;}
+    .colour-table th{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1);}
+    .colour-table td{padding:12px 14px;font-size:14px;color:var(--gray-lt);border-bottom:1px solid rgba(255,255,255,0.05);}
+    .colour-swatch{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:8px;vertical-align:middle;}
+    .post-cta{background:var(--surface);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:40px;margin:64px auto;max-width:740px;text-align:center;}
+    .post-cta h3{font-size:26px;font-weight:800;margin-bottom:12px;}
+    .post-cta p{font-size:15px;color:var(--gray);margin-bottom:24px;}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray);margin-bottom:32px;transition:color 0.2s;}
+    .back-link:hover{color:var(--amber);}
+    footer{background:var(--surface);border-top:1px solid rgba(255,255,255,0.06);padding:48px 0 28px;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+    .footer-bottom p{font-size:13px;color:var(--gray);}
+    .footer-disclaimer{margin-top:20px;font-size:12px;color:rgba(148,163,184,0.5);line-height:1.7;}
+    @media(max-width:640px){.nav-links,.btn-primary.nav-cta-desktop{display:none;}.hamburger{display:flex;}}
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="BuilderPilot home">
+        <div class="nav-logo-icon"><span>B<em>P</em></span></div>
+        <span class="nav-wordmark">Builder<em>Pilot</em></span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html#system">The System</a></li>
+        <li><a href="../index.html#products">Field Guides</a></li>
+        <li><a href="../index.html#principles">The Rules</a></li>
+        <li><a href="../mentorship.html">Mentorship</a></li>
+        <li><a href="index.html" aria-current="page">Blog</a></li>
+      </ul>
+      <a href="../index.html#access" class="btn-primary nav-cta-desktop">Get the Guides
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="../index.html#system" onclick="closeMobileNav()">The System</a>
+    <a href="../index.html#products" onclick="closeMobileNav()">Field Guides</a>
+    <a href="../mentorship.html" onclick="closeMobileNav()">Mentorship</a>
+    <a href="index.html" onclick="closeMobileNav()">Blog</a>
+    <a href="../index.html#access" class="btn-primary" onclick="closeMobileNav()">Get the Guides</a>
+  </nav>
+
+  <header class="post-hero">
+    <div class="container">
+      <a href="index.html" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        All posts
+      </a>
+      <div class="post-meta">
+        <span class="post-tag">Compliance</span>
+        <span class="post-time">5 min read · June 2026</span>
+      </div>
+      <h1>ON1Call Locates: Why Every Ontario Site Super Takes This Seriously</h1>
+      <p class="lead">Underground locates are mandatory by law in Ontario before any excavation. Here's what you need to know — the colours, the process, your obligations under OHSA, and what happens when someone skips the call.</p>
+    </div>
+  </header>
+
+  <article class="post-body">
+
+    <p>If you've been on an Ontario construction site for more than a week, you've heard about locates. But familiarity breeds complacency, and complacency on this particular topic puts people in the ground — literally and professionally.</p>
+
+    <p>ON1Call is Ontario's one-call notification system. When you submit a locate request, ON1Call notifies all member utilities operating underground in that area. Those utilities send out their locators, who mark the ground with spray paint and flags. <strong>You do not touch the ground until you have those marks.</strong></p>
+
+    <h2>What the Law Actually Says</h2>
+
+    <p>Under the <strong>Ontario Underground Infrastructure Notification System Act (OUINSA)</strong>, any person who intends to excavate must notify ON1Call at least three working days before breaking ground — unless it's an emergency. This is not a guideline. It is a legal requirement, and violations can result in significant fines under the Act.</p>
+
+    <p>OHSA layers on top of this. As a site supervisor, you are a "supervisor" under the Act and carry personal liability for ensuring workers under your direction comply with the law and with safe work practices. If a worker strikes an underground utility and an incident results, the supervisor's failure to secure locates will be examined.</p>
+
+    <div class="callout">
+      <p><strong>Three working days minimum.</strong> Submit the locate request before the weekend if you're breaking ground Monday. "I forgot" is not a defence that has ever held up.</p>
+    </div>
+
+    <h2>Understanding the Colours</h2>
+
+    <p>Ontario follows the APWA (American Public Works Association) colour code for underground utility markings. Every site supervisor should know these without having to look them up:</p>
+
+    <table class="colour-table">
+      <thead>
+        <tr>
+          <th>Colour</th>
+          <th>Utility</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="colour-swatch" style="background:#FF0000;"></span> Red</td>
+          <td>Electric power lines, cables, conduit, and lighting cables</td>
+        </tr>
+        <tr>
+          <td><span class="colour-swatch" style="background:#FFC0CB;"></span> Pink</td>
+          <td>Temporary survey markings</td>
+        </tr>
+        <tr>
+          <td><span class="colour-swatch" style="background:#FF6600;"></span> Orange</td>
+          <td>Telecommunications, alarm or signal lines, cables or conduit</td>
+        </tr>
+        <tr>
+          <td><span class="colour-swatch" style="background:#FFFF00;border:1px solid rgba(255,255,255,0.2);"></span> Yellow</td>
+          <td>Natural gas, oil, steam, petroleum, or gaseous materials</td>
+        </tr>
+        <tr>
+          <td><span class="colour-swatch" style="background:#00CC00;"></span> Green</td>
+          <td>Sewers and drain lines</td>
+        </tr>
+        <tr>
+          <td><span class="colour-swatch" style="background:#0066FF;"></span> Blue</td>
+          <td>Potable water</td>
+        </tr>
+        <tr>
+          <td><span class="colour-swatch" style="background:#9900CC;"></span> Purple</td>
+          <td>Reclaimed water, irrigation, and slurry lines</td>
+        </tr>
+        <tr>
+          <td><span class="colour-swatch" style="background:#FFFFFF;border:1px solid rgba(255,255,255,0.3);"></span> White</td>
+          <td>Proposed excavation area</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>The Locate Process Step by Step</h2>
+
+    <ol>
+      <li><strong>Submit your request.</strong> You can call 1-800-400-2255 or submit online at on1call.com. Provide the excavation address, the type of work, the start date, and the excavation area. Be specific about depth — this matters.</li>
+      <li><strong>Wait the required time.</strong> Three working days, minimum. This is not negotiable. If utilities haven't responded within that window, contact ON1Call.</li>
+      <li><strong>Receive your confirmation.</strong> You'll get a locate ticket number. Keep it. This is your proof of compliance.</li>
+      <li><strong>Verify all utilities have responded.</strong> Not just that you got a ticket — that every utility in the area has either marked or cleared the zone.</li>
+      <li><strong>Respect the marks.</strong> Expose by hand within 1 metre of a marked line. Do not assume depth. Do not use power equipment within that tolerance zone.</li>
+    </ol>
+
+    <h2>What "Positive Response" Means</h2>
+
+    <p>ON1Call's positive response system requires member utilities to respond to every locate request — either by marking in the field or by confirming they have no infrastructure in the area. Before you excavate, every utility on your ticket should show a positive response. If one is outstanding, you wait or you call.</p>
+
+    <div class="callout">
+      <p><strong>No response is not clearance.</strong> An unresponded utility is not proof there's nothing there. It means you don't know. You don't dig when you don't know.</p>
+    </div>
+
+    <h2>When Marks Aren't Enough</h2>
+
+    <p>Locates tell you where the utility is horizontally. They tell you nothing precise about depth. The actual depth depends on installation history, soil movement, and whether anyone followed specs when the line went in — which is a significant assumption on old infrastructure.</p>
+
+    <p>Within 1 metre of any marked utility, the OHSA requirement is to expose by hand. Hydrovac is the preferred method on production residential sites where there's schedule pressure but the risk of a gas strike is real. Using an excavator within that zone without manual exposure is an OHSA violation, not just a bad call.</p>
+
+    <h2>Your CYA Documentation</h2>
+
+    <p>Keep a locate file for every project. It should include:</p>
+    <ul>
+      <li>Your ON1Call ticket number and submission confirmation</li>
+      <li>The date submitted and the earliest permitted dig date</li>
+      <li>Positive response confirmations from each utility</li>
+      <li>Photos of the marks in place before excavation begins</li>
+      <li>Notes of any conversations with locators about uncertain areas</li>
+    </ul>
+
+    <p>If something goes wrong, that file is the difference between an investigation that clears you and one that doesn't.</p>
+
+    <p>Call before you dig. Every time. No exceptions.</p>
+
+  </article>
+
+  <div class="post-cta container">
+    <span class="label">Free Download</span>
+    <h3>Get the Pre-Drywall Inspection Checklist</h3>
+    <p>Free field-ready checklist plus the 25 Drywall Killers bonus — delivered to your inbox.</p>
+    <a href="../index.html#access" class="btn-primary">Download Free
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 <em>BuilderPilot</em> · Stephen Ford</p>
+        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber);">← Back to Blog</a>
+      </div>
+      <p class="footer-disclaimer">BuilderPilot is an independent educational resource. References to OHSA, OUINSA, and ON1Call are general — confirm current requirements with the governing authority. Nothing here is legal advice.</p>
+    </div>
+  </footer>
+
+  <script>
+    var nb=document.getElementById('navbar');
+    window.addEventListener('scroll',function(){nb.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+    window.toggleNav=function(b){var n=document.getElementById('mobile-nav');var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);};
+    window.closeMobileNav=function(){document.getElementById('mobile-nav').classList.remove('open');};
+  </script>
+</body>
+</html>
