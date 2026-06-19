@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentorship — BuilderPilot</title>
+  <meta name="description" content="One-on-one mentorship for residential site supervisors and builders from Stephen Ford — 20+ years on low-rise residential production sites.">
+  <meta property="og:title" content="Mentorship — BuilderPilot">
+  <meta property="og:description" content="One-on-one mentorship for residential site supervisors and builders.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #16191F;
+      --navy:    #2B4C6F;
+      --blue:    #3E6A97;
+      --amber:   #F2A33C;
+      --amber-dk:#D4891E;
+      --white:   #FFFFFF;
+      --gray:    #94A3B8;
+      --gray-lt: #CBD5E1;
+      --surface: #1E2530;
+      --surface2:#252D3A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    em { font-style: normal; color: var(--amber); }
+
+    .label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ─── NAV ─────────────────────────── */
+    nav#navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 32px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      background: rgba(22,25,31,0);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav#navbar.scrolled {
+      background: rgba(22,25,31,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--amber);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: var(--black);
+      letter-spacing: -0.03em;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-icon em { color: var(--black); font-style: normal; }
+
+    .nav-wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--white);
+    }
+
+    .nav-wordmark em { color: var(--amber); font-style: normal; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      margin-left: auto;
+      margin-right: 28px;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] { color: var(--white); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: var(--amber);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-dk);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.6);
+      color: var(--white);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      margin-left: auto;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(22,25,31,0.98);
+      backdrop-filter: blur(16px);
+      z-index: 99;
+      flex-direction: column;
+      padding: 12px 24px 24px;
+      gap: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.8);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s;
+    }
+
+    .mobile-nav a:last-child { border-bottom: none; margin-top: 8px; }
+    .mobile-nav a:hover { color: var(--white); }
+
+    /* ─── HERO ────────────────────────── */
+    .page-hero {
+      position: relative;
+      padding: 148px 0 96px;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 60% 0%, rgba(43,76,111,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 100%, rgba(62,106,151,0.2) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    .page-hero .container { position: relative; z-index: 1; }
+
+    .page-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .page-hero-eyebrow-line {
+      width: 32px;
+      height: 2px;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .page-hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    /* ─── DIVIDER LINE ─────────────────── */
+    .section-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 0;
+    }
+
+    /* ─── WHAT TO EXPECT ──────────────── */
+    .expect-section {
+      padding: 96px 0;
+      background: var(--surface);
+    }
+
+    .expect-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .expect-text h2 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .expect-text p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .expect-text p:last-child { margin-bottom: 0; }
+
+    .expect-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .expect-card {
+      padding: 24px 28px;
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      border-left: 3px solid var(--amber);
+    }
+
+    .expect-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .expect-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ─── WHO IT'S FOR ─────────────────── */
+    .who-section {
+      padding: 96px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(34px, 5vw, 52px);
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 12px 0 16px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .who-card {
+      padding: 32px 28px;
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .who-card:hover {
+      border-color: rgba(242,163,60,0.3);
+      transform: translateY(-3px);
+    }
+
+    .who-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(43,76,111,0.5);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--amber);
+    }
+
+    .who-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .who-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ─── CONTACT / CTA ───────────────── */
+    .contact-section {
+      padding: 96px 0;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(62,106,151,0.4) 0%, transparent 60%);
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+    }
+
+    .contact-inner h2 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .contact-inner p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .contact-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 16px;
+    }
+
+    /* ─── FOOTER ──────────────────────── */
+    footer {
+      background: #0F1218;
+      padding: 56px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.65;
+      margin-top: 14px;
+      max-width: 260px;
+    }
+
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .footer-logo-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--amber);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+
+    .footer-logo-icon em { color: var(--black); font-style: normal; }
+
+    .footer-logo-wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--white);
+    }
+
+    .footer-logo-wordmark em { color: var(--amber); font-style: normal; }
+
+    .footer-col h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      font-size: 13px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-links a {
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+
+    .social-links a:hover { color: var(--white); }
+
+    .footer-disclaimer {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.6;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* ─── RESPONSIVE ──────────────────── */
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .expect-grid { grid-template-columns: 1fr; gap: 48px; }
+      .who-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta-desktop { display: none; }
+      .hamburger { display: flex; }
+      .who-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .page-hero { padding: 120px 0 72px; }
+      .expect-section, .who-section, .contact-section { padding: 64px 0; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ──────────────────────────────────── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="BuilderPilot home">
+        <div class="nav-logo-icon"><span>B<em>P</em></span></div>
+        <span class="nav-wordmark">Builder<em>Pilot</em></span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#system">The System</a></li>
+        <li><a href="index.html#products">Field Guides</a></li>
+        <li><a href="index.html#principles">The Rules</a></li>
+        <li><a href="index.html#who">Who It's For</a></li>
+        <li><a href="mentorship.html" aria-current="page">Mentorship</a></li>
+      </ul>
+
+      <a href="#contact" class="btn-primary nav-cta-desktop">
+        Get in Touch
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleNav(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="index.html#system" onclick="closeMobileNav()">The System</a>
+    <a href="index.html#products" onclick="closeMobileNav()">Field Guides</a>
+    <a href="index.html#principles" onclick="closeMobileNav()">The Rules</a>
+    <a href="index.html#who" onclick="closeMobileNav()">Who It's For</a>
+    <a href="mentorship.html" onclick="closeMobileNav()">Mentorship</a>
+    <a href="#contact" class="btn-primary" onclick="closeMobileNav()">Get in Touch</a>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────────── -->
+  <header class="page-hero" aria-labelledby="mentorship-heading">
+    <div class="container">
+      <div class="page-hero-eyebrow">
+        <div class="page-hero-eyebrow-line" aria-hidden="true"></div>
+        <span class="label">BuilderPilot · One-on-One</span>
+      </div>
+      <h1 id="mentorship-heading">
+        Mentorship
+        <em>.</em>
+      </h1>
+      <p class="page-hero-sub">
+        Real guidance from someone who's been on the site. Whether you're stepping into supervision for the first time or looking to sharpen how you run a larger project — reach out.
+      </p>
+    </div>
+  </header>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── WHAT TO EXPECT ────────────────────────── -->
+  <section class="expect-section" aria-labelledby="expect-heading">
+    <div class="container">
+      <div class="expect-grid">
+
+        <div class="expect-text">
+          <span class="label">How It Works</span>
+          <h2 id="expect-heading">Learn It from<br>Someone Who's<br><em>Lived It.</em></h2>
+          <p>
+            BuilderPilot mentorship isn't a course or a webinar. It's a direct conversation with Stephen Ford — 20+ years running low-rise residential production sites across Ontario.
+          </p>
+          <p>
+            The things that take most supers years to figure out on their own don't have to. The morning walk, the trade conversation, the deficiency process, how to protect yourself on a Tarion file — this is the kind of guidance that comes from actually doing it.
+          </p>
+          <p>
+            Contact to learn more about availability and what a mentorship engagement looks like.
+          </p>
+        </div>
+
+        <div class="expect-cards" role="list">
+          <div class="expect-card" role="listitem">
+            <h3>Site Supervision Fundamentals</h3>
+            <p>The daily rhythm, trade management, QC walks, scheduling decisions, and how to build a site that runs itself when you're not looking.</p>
+          </div>
+          <div class="expect-card" role="listitem">
+            <h3>Ontario Regulatory Navigation</h3>
+            <p>OBC, Tarion, ON1Call locates, the PDO process — understanding what the paperwork means and how to protect yourself and the homeowner.</p>
+          </div>
+          <div class="expect-card" role="listitem">
+            <h3>Career Development</h3>
+            <p>Moving from trades to supervision, building a track record, developing leadership instincts, and knowing when to escalate vs. when to own it.</p>
+          </div>
+          <div class="expect-card" role="listitem">
+            <h3>Production Builder Context</h3>
+            <p>Running volume. Managing multiple units, tight schedules, builder-side reporting, and how to keep pace without losing quality.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── WHO IT'S FOR ──────────────────────────── -->
+  <section class="who-section" aria-labelledby="who-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Who It's For</span>
+        <h2 id="who-heading">If You're On<br>the <em>Tools</em> or<br>the <em>Site</em> — This Is for You.</h2>
+        <p>Mentorship is available for people who are serious about building a real career in residential construction supervision.</p>
+      </div>
+
+      <div class="who-grid" role="list">
+
+        <div class="who-card" role="listitem">
+          <div class="who-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <h3>New Site Supervisors</h3>
+          <p>Just stepped up from trades and trying to figure out how to actually run a site — not just be on one. Mentorship accelerates the learning curve.</p>
+        </div>
+
+        <div class="who-card" role="listitem">
+          <div class="who-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3>Assistant Superintendents</h3>
+          <p>Learning the role alongside a senior super. Mentorship helps you build the judgement to make decisions independently and earn trust faster.</p>
+        </div>
+
+        <div class="who-card" role="listitem">
+          <div class="who-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Experienced Supers Who Want to Level Up</h3>
+          <p>You've been running sites for a few years. You want sharper systems, better reporting, and cleaner processes — not more of the same.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ───────────────────────────────── -->
+  <section class="contact-section" id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="contact-inner">
+        <span class="label">Get in Touch</span>
+        <h2 id="contact-heading">
+          Reach Out for<br><em>More Information.</em>
+        </h2>
+        <p>
+          Mentorship availability is limited. If you're interested in working with Stephen directly, send a message and he'll get back to you with details on current availability and what to expect.
+        </p>
+        <div class="contact-cta-row">
+          <a href="mailto:hello@builderpilot.ca" class="btn-primary">
+            Contact for More Information
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="index.html#products" class="btn-outline">Browse the Field Guides</a>
+        </div>
+        <p class="contact-note">Response time is typically 2–3 business days.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo" aria-label="BuilderPilot home">
+            <div class="footer-logo-icon" aria-hidden="true"><span>B<em>P</em></span></div>
+            <span class="footer-logo-wordmark">Builder<em>Pilot</em></span>
+          </a>
+          <p>Field systems for production residential construction. Tools, reporting systems, and guides for low-rise residential site superintendents and builders.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Field Guides</h5>
+          <ul role="list">
+            <li><a href="index.html#products">Site Supervisor Playbook</a></li>
+            <li><a href="index.html#products">New Super Survival Guide</a></li>
+            <li><a href="index.html#products">AI Reporting Kit</a></li>
+            <li><a href="index.html#products">The 25 Drywall Killers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <ul role="list">
+            <li><a href="index.html#system">The System</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#principles">The Rules</a></li>
+            <li><a href="index.html#who">Who It's For</a></li>
+            <li><a href="mentorship.html">Mentorship</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Get the Guides</h5>
+          <ul role="list">
+            <li><a href="https://builderpilot.gumroad.com" rel="noopener noreferrer" target="_blank">Gumroad Store</a></li>
+            <li><a href="https://instagram.com/builderpilotguide" rel="noopener noreferrer" target="_blank">@builderpilotguide</a></li>
+            <li><a href="index.html#access">Free Checklist</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 <em>BuilderPilot</em> · Stephen Ford · Field Systems for Production Residential Construction.</p>
+        <div class="social-links" role="list" aria-label="Social media links">
+          <a href="https://instagram.com/builderpilotguide" aria-label="BuilderPilot on Instagram" rel="noopener noreferrer" target="_blank" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://builderpilot.gumroad.com" aria-label="BuilderPilot on Gumroad" rel="noopener noreferrer" target="_blank" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <p class="footer-disclaimer">
+        BuilderPilot is an independent educational resource. It is not affiliated with, endorsed by, or derived from any specific employer, builder, or proprietary system. References to regulations (OHSA, the Ontario Building Code, Tarion, the Construction Act) are general — always confirm current requirements with the governing authority. Nothing here is legal advice.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    function toggleNav(btn) {
+      const nav = document.getElementById('mobile-nav');
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    function closeMobileNav() {
+      const nav = document.getElementById('mobile-nav');
+      nav.classList.remove('open');
+      const btn = document.querySelector('.hamburger');
+      if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open menu'); }
+    }
+  </script>
+</body>
+</html>

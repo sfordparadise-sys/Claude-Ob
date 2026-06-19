@@ -1,0 +1,2648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuilderPilot — Field Systems for Production Residential Construction</title>
+  <meta name="description" content="BuilderPilot builds field tools, reporting systems, and guides for residential site superintendents and production builders. Run by Stephen Ford — 20+ years on low-rise residential production sites. Walk. Verify. Release.">
+  <meta property="og:title" content="BuilderPilot — Field Systems for Production Residential Construction">
+  <meta property="og:description" content="Field-tested tools, reporting systems, and guides for residential site supervisors and builders.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #16191F;
+      --navy:    #2B4C6F;
+      --blue:    #3E6A97;
+      --amber:   #F2A33C;
+      --amber-dk:#D4891E;
+      --white:   #FFFFFF;
+      --gray:    #94A3B8;
+      --gray-lt: #CBD5E1;
+      --surface: #1E2530;
+      --surface2:#252D3A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { position: relative; }
+
+    /* ─── NAV ────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 0 24px;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(22, 25, 31, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--amber);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-icon span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .nav-logo-icon span em {
+      color: var(--black);
+      font-style: normal;
+    }
+
+    .nav-wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-wordmark em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gray-lt);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-dk);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      border: none;
+      background: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ───────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(165deg, rgba(22,25,31,0.82) 0%, rgba(22,25,31,0.55) 50%, rgba(22,25,31,0.90) 100%),
+        linear-gradient(to bottom, transparent 40%, var(--black) 100%);
+      z-index: 1;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/stephen-site.jpeg');
+      background-size: cover;
+      background-position: center 30%;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(var(--white) 1px, transparent 1px),
+        linear-gradient(90deg, var(--white) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0 80px;
+      max-width: 820px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow-line {
+      width: 32px;
+      height: 2px;
+      background: var(--amber);
+    }
+
+    .hero h1 {
+      font-size: clamp(54px, 7.5vw, 96px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      line-height: 0.95;
+    }
+
+    .hero h1 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--gray-lt);
+      max-width: 580px;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.4;
+    }
+
+    .hero-scroll span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      animation: scrollBounce 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ─── STATS BAR ──────────────────────────────── */
+    .stats-bar {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0;
+    }
+
+    .stats-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ─── SECTION SPACING ────────────────────────── */
+    .section-pad { padding: 96px 0; }
+
+    .section-header { margin-bottom: 64px; }
+
+    .section-header h2 {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-top: 12px;
+    }
+
+    .section-header h2 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .section-header p {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 560px;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    /* ─── PROBLEM SECTION ────────────────────────── */
+    .problem-bg { background: var(--surface); }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .problem-text h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      line-height: 0.95;
+    }
+
+    .problem-text h2 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .problem-text p {
+      color: var(--gray);
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .problem-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 16px;
+      color: var(--gray-lt);
+    }
+
+    .problem-list li svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--amber);
+    }
+
+    .principle-card-large {
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .principle-card-large::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--amber);
+    }
+
+    .pcl-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .pcl-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .pcl-text em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .pcl-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 28px;
+    }
+
+    /* ─── FRAMEWORK (WALK LOG RECAP TRACK) ───────── */
+    .framework-bg { background: var(--navy); }
+
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      counter-reset: phase;
+    }
+
+    .framework-card {
+      background: rgba(22, 25, 31, 0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 32px 26px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .framework-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(242, 163, 60, 0.4);
+    }
+
+    .framework-phase {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+
+    .framework-card h3 {
+      font-size: 28px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .framework-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    .framework-when {
+      margin-top: 18px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .framework-note {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .framework-note em {
+      color: var(--amber);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ─── WHAT IS BUILDERPILOT ───────────────────── */
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .what-text h2 {
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    .what-text h2 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .what-text p {
+      color: var(--gray);
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .founder-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 28px;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      border-left: 3px solid var(--amber);
+    }
+
+    .founder-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .founder-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .founder-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+    }
+
+    .founder-title {
+      font-size: 13px;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px 28px;
+      background: var(--surface);
+      transition: background 0.2s;
+    }
+
+    .feature-item:hover { background: var(--surface2); }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: rgba(242, 163, 60, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--amber);
+    }
+
+    .feature-item h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+    }
+
+    .feature-item p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* ─── FLAGSHIP BAND ──────────────────────────── */
+    .flagship {
+      background: linear-gradient(135deg, #1a2535 0%, var(--navy) 100%);
+      border: 1px solid rgba(242,163,60,0.25);
+      border-radius: 16px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flagship::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--amber);
+    }
+
+    .flagship-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--amber);
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .flagship h3 {
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.98;
+      margin-bottom: 8px;
+    }
+
+    .flagship h3 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .flagship-tagline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gray-lt);
+      margin-bottom: 20px;
+    }
+
+    .flagship p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .flagship-toc {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 20px;
+    }
+
+    .flagship-toc li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray-lt);
+      line-height: 1.4;
+    }
+
+    .flagship-toc li svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--amber);
+    }
+
+    /* ─── PRODUCTS ────────────────────────────────── */
+    .products-bg { background: var(--surface); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(242, 163, 60, 0.4);
+    }
+
+    .product-card.featured {
+      border-color: rgba(242, 163, 60, 0.5);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--amber);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .product-badge.free {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .product-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(242, 163, 60, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--amber);
+      margin-bottom: 22px;
+    }
+
+    .product-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+      line-height: 1.05;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .product-meta {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .product-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ─── RELEASE BAND ───────────────────────────── */
+    .release-band {
+      background: linear-gradient(135deg, #0f1824 0%, #111a28 100%);
+      border: 1px solid rgba(62,106,151,0.35);
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .release-band::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--blue);
+    }
+
+    .release-text {
+      padding: 48px 48px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .release-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      background: var(--blue);
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .release-text h3 {
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .release-tagline {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: 'Barlow Condensed', sans-serif;
+      margin-bottom: 14px;
+    }
+
+    .release-text > p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .release-stations {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+      margin-bottom: 28px;
+    }
+
+    .release-stations li {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .release-stations li span.stn {
+      color: var(--amber);
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      min-width: 36px;
+    }
+
+    .release-ctas {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .release-bonus {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .release-visual {
+      overflow: hidden;
+      position: relative;
+      min-height: 340px;
+    }
+
+    .release-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left center;
+      display: block;
+    }
+
+    .product-badge.coming {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.55);
+    }
+
+    @media (max-width: 768px) {
+      .release-band { grid-template-columns: 1fr; }
+      .release-visual { display: none; }
+      .release-text { padding: 36px 28px; }
+      .release-stations { grid-template-columns: 1fr; }
+    }
+
+    /* ─── PRINCIPLES ──────────────────────────────── */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .principle-card {
+      border-radius: 12px;
+      padding: 44px 40px;
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .principle-card.dark {
+      background: #16191F;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .principle-card.blue {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .principle-card.amber { background: var(--amber); }
+
+    .principle-card.dark-blue {
+      background: #1a2535;
+      border: 1px solid rgba(62,106,151,0.3);
+    }
+
+    .pc-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 20px;
+    }
+
+    .principle-card.amber .pc-eyebrow { color: var(--black); opacity: 0.6; }
+
+    .pc-quote {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      flex: 1;
+    }
+
+    .principle-card.amber .pc-quote { color: var(--black); }
+
+    .pc-quote em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .principle-card.amber .pc-quote em {
+      color: var(--black);
+      text-decoration: underline;
+      text-decoration-color: rgba(22,25,31,0.3);
+    }
+
+    .pc-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      margin-top: 24px;
+    }
+
+    .principle-card.amber .pc-brand { color: var(--black); opacity: 0.4; }
+
+    /* ─── WHO IT'S FOR ────────────────────────────── */
+    .audience-bg { background: var(--surface); }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .audience-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 32px 28px;
+      background: var(--black);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .audience-card:hover {
+      border-color: rgba(242, 163, 60, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .audience-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .audience-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .audience-benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .audience-benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gray-lt);
+      line-height: 1.5;
+    }
+
+    .audience-benefits li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ─── DAY IN THE LIFE TIMELINE ───────────────── */
+    .day-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .day-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 28px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .day-item:last-child { border-bottom: none; }
+
+    .day-time {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--amber);
+      text-transform: uppercase;
+    }
+
+    .day-content h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+
+    .day-content p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── CTA SECTION ────────────────────────────── */
+    .cta-section {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(242,163,60,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 50%, rgba(62,106,151,0.2) 0%, transparent 60%);
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .cta-inner h2 {
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .cta-inner h2 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .cta-inner p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cta-form input {
+      flex: 1;
+      padding: 14px 20px;
+      background: rgba(22,25,31,0.6);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      min-width: 0;
+    }
+
+    .cta-form input::placeholder { color: rgba(255,255,255,0.3); }
+    .cta-form input:focus { border-color: var(--amber); }
+
+    .cta-form button {
+      border-radius: 0 6px 6px 0;
+      white-space: nowrap;
+    }
+
+    .cta-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    .cta-secondary {
+      margin-top: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+
+    .cta-secondary:hover { gap: 12px; }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer {
+      background: #0F1218;
+      padding: 64px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .footer-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--amber);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .footer-logo-icon span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .footer-logo-icon span em {
+      color: var(--black);
+      font-style: normal;
+    }
+
+    .footer-logo-wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-logo-wordmark em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .footer-col h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li + li { margin-top: 10px; }
+
+    .footer-col ul li a {
+      font-size: 14px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.6;
+    }
+
+    .footer-bottom p em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .social-links a:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .footer-disclaimer {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      line-height: 1.6;
+      margin-top: 20px;
+      max-width: 720px;
+    }
+
+    /* ─── MOBILE NAV ─────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(22, 25, 31, 0.97);
+      backdrop-filter: blur(16px);
+      z-index: 49;
+      padding: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray-lt);
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s;
+    }
+
+    .mobile-nav a:hover { color: var(--white); }
+    .mobile-nav .btn-primary { margin-top: 16px; justify-content: center; }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 1024px) {
+      .framework-grid { grid-template-columns: repeat(2, 1fr); }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta-desktop { display: none; }
+      .hamburger { display: flex; }
+
+      .hero h1 { font-size: 48px; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; }
+
+      .problem-grid { grid-template-columns: 1fr; }
+      .what-grid { grid-template-columns: 1fr; }
+      .flagship { grid-template-columns: 1fr; gap: 32px; padding: 36px 28px; }
+      .framework-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+      .day-item { grid-template-columns: 1fr; gap: 6px; }
+
+      .cta-form { flex-direction: column; }
+      .cta-form input { border-right: 1.5px solid rgba(255,255,255,0.15); border-radius: 6px; }
+      .cta-form button { border-radius: 6px; }
+
+      .stat-divider { display: none; }
+      .stats-grid { gap: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .section-pad { padding: 64px 0; }
+      .hero-content { padding: 96px 0 64px; }
+      .principle-card { padding: 32px 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* ─── LEAD MAGNET POPUP ──────────────────────── */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(5px);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .popup-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-modal {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid var(--amber);
+      border-radius: 16px;
+      max-width: 840px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(24px) scale(0.98);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+
+    .popup-overlay.open .popup-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .popup-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1fr;
+      min-height: 480px;
+    }
+
+    .popup-visual {
+      background: #0c0f15;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .popup-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .popup-visual-badge {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+      padding: 28px 20px 20px;
+      text-align: center;
+    }
+
+    .popup-visual-badge span {
+      display: inline-block;
+      background: var(--amber);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 18px;
+      border-radius: 4px;
+    }
+
+    .popup-content {
+      padding: 44px 40px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--gray);
+      cursor: pointer;
+      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .popup-close:hover {
+      background: rgba(255,255,255,0.14);
+      color: var(--white);
+    }
+
+    .popup-content h2 {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 12px 0 14px;
+      line-height: 1.05;
+    }
+
+    .popup-content > p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .popup-includes {
+      list-style: none;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .popup-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .popup-includes li svg {
+      flex-shrink: 0;
+      color: var(--amber);
+      margin-top: 1px;
+    }
+
+    .popup-field {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .popup-field input[type="email"] {
+      flex: 1;
+      padding: 13px 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(255,255,255,0.13);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      min-width: 0;
+    }
+
+    .popup-field input[type="email"]:focus {
+      border-color: var(--amber);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .popup-field input[type="email"]::placeholder { color: rgba(148,163,184,0.7); }
+
+    .popup-field .btn-primary {
+      border-radius: 0 6px 6px 0;
+      white-space: nowrap;
+      font-size: 13px;
+      padding: 13px 18px;
+    }
+
+    .popup-fine {
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      margin: 0;
+    }
+
+    .popup-success {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      padding: 24px;
+      background: rgba(242,163,60,0.07);
+      border: 1px solid rgba(242,163,60,0.22);
+      border-radius: 10px;
+      margin-top: auto;
+    }
+
+    .popup-success.visible { display: flex; }
+
+    .popup-success-check {
+      width: 40px;
+      height: 40px;
+      background: var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+
+    .popup-success h3 {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .popup-success p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .popup-success .btn-primary {
+      font-size: 13px;
+      padding: 11px 20px;
+      align-self: flex-start;
+    }
+
+    .popup-error-msg {
+      font-size: 12px;
+      color: #f87171;
+      margin-top: 6px;
+      display: none;
+    }
+
+    @media (max-width: 680px) {
+      .popup-grid { grid-template-columns: 1fr; }
+      .popup-visual { display: none; }
+      .popup-content { padding: 36px 28px 32px; }
+      .popup-field { flex-direction: column; }
+      .popup-field input[type="email"] { border-right: 1.5px solid rgba(255,255,255,0.13); border-radius: 6px; }
+      .popup-field .btn-primary { border-radius: 6px; margin-top: 8px; }
+    }
+  </style>
+<script>
+(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+.push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account', '2448027');
+</script>
+</head>
+<body>
+
+  <!-- ─── NAV ──────────────────────────────────── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="BuilderPilot home">
+        <div class="nav-logo-icon"><span>B<em>P</em></span></div>
+        <span class="nav-wordmark">Builder<em>Pilot</em></span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#system">The System</a></li>
+        <li><a href="#products">Field Guides</a></li>
+        <li><a href="#principles">The Rules</a></li>
+        <li><a href="#who">Who It's For</a></li>
+        <li><a href="mentorship.html">Mentorship</a></li>
+      </ul>
+
+      <a href="#access" class="btn-primary nav-cta-desktop">
+        Get the Guides
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleNav(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="#system" onclick="closeMobileNav()">The System</a>
+    <a href="#products" onclick="closeMobileNav()">Field Guides</a>
+    <a href="#principles" onclick="closeMobileNav()">The Rules</a>
+    <a href="#who" onclick="closeMobileNav()">Who It's For</a>
+    <a href="mentorship.html" onclick="closeMobileNav()">Mentorship</a>
+    <a href="#access" class="btn-primary" onclick="closeMobileNav()">Get the Guides</a>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-line" aria-hidden="true"></div>
+          <span class="label">Field Systems for Production Residential Construction</span>
+        </div>
+
+        <h1>
+          Run the Site
+          <em>Like You Own It.</em>
+        </h1>
+
+        <p class="hero-sub">
+          BuilderPilot builds the field tools, reporting systems, and guides that Ontario residential site superintendents and production builders actually use — written by someone who's spent 20+ years on low-rise residential sites, not behind a desk. Real site. Real lessons. Better supervision.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#products" class="btn-primary">
+            Browse the Field Guides
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#system" class="btn-outline">See the System</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <svg class="scroll-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <!-- ─── STATS BAR ──────────────────────────────── -->
+  <div class="stats-bar" role="region" aria-label="BuilderPilot at a glance">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Years on Production Sites</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <div class="stat-number">100</div>
+          <div class="stat-label">Rules in the Playbook</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <div class="stat-number">9</div>
+          <div class="stat-label">Field Systems &amp; Guides</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <div class="stat-number">15min</div>
+          <div class="stat-label">From Walk to Sent Report</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PROBLEM ───────────────────────────────── -->
+  <section class="problem-bg section-pad" aria-labelledby="problem-heading">
+    <div class="container">
+      <div class="problem-grid">
+        <div class="problem-text">
+          <span class="label">The Field Reality</span>
+          <h2 id="problem-heading">
+            Nobody Hands You<br>a <em>Playbook.</em>
+          </h2>
+          <p>
+            You figure out site supervision by watching, getting burned, and eventually building a rhythm that works. Most supers are promoted because they're good in the field — not because anyone taught them how to lead a site.
+          </p>
+          <p>
+            Production residential moves fast, and the small misses are the expensive ones. BuilderPilot turns hard-won field experience into systems you can run from day one.
+          </p>
+
+          <ul class="problem-list" role="list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Small misses get covered behind drywall and surface as warranty claims
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Daily reporting that everyone knows matters but nobody keeps up
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Open items rolling off the page and resurfacing as closing-week crises
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              New supers thrown into the deep end with no system to lean on
+            </li>
+          </ul>
+        </div>
+
+        <div class="principle-card-large" role="figure" aria-label="BuilderPilot principle: No bad trades, only bad leadership">
+          <div class="pcl-eyebrow">Leadership Principle</div>
+          <div class="pcl-text">
+            No Bad<br>Trades.<br>Only Bad<br><em>Leadership.</em>
+          </div>
+          <div class="pcl-brand">BuilderPilot</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── THE SYSTEM: WALK LOG RECAP TRACK ──────── -->
+  <section class="framework-bg section-pad" id="system" aria-labelledby="system-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">The Core System</span>
+        <h2 id="system-heading">Walk · Log · Recap · <em>Track.</em></h2>
+        <p>Every BuilderPilot tool plugs into one simple daily loop. Learn the loop and the whole system clicks: nothing falls through, and the record builds itself.</p>
+      </div>
+
+      <div class="framework-grid">
+        <div class="framework-card">
+          <div class="framework-phase">Phase 01</div>
+          <h3>Walk</h3>
+          <p>A morning pass of every active lot. One voice note per block — stage, anything outstanding, anything that changed.</p>
+          <div class="framework-when">Start of Day · Zero extra time</div>
+        </div>
+
+        <div class="framework-card">
+          <div class="framework-phase">Phase 02</div>
+          <h3>Log</h3>
+          <p>Capture events as they happen — a deficiency, a no-show, a delivery, a direction given. One line each, all day.</p>
+          <div class="framework-when">Throughout the Day · ~30 sec each</div>
+        </div>
+
+        <div class="framework-card">
+          <div class="framework-phase">Phase 03</div>
+          <h3>Recap</h3>
+          <p>Drop the day's raw notes into the system, review the formatted output, and send a clean, defensible report.</p>
+          <div class="framework-when">End of Day · 10–15 min</div>
+        </div>
+
+        <div class="framework-card">
+          <div class="framework-phase">Phase 04</div>
+          <h3>Track</h3>
+          <p>Outstanding items carry forward to tomorrow until they're confirmed closed and photographed. Nothing slips.</p>
+          <div class="framework-when">Rolling · Built into the recap</div>
+        </div>
+      </div>
+
+      <p class="framework-note">
+        Walk without Log is observing, not documenting. Log without Recap is collecting, not communicating. <em>The whole point of the loop is that nothing falls through.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── WHAT IS BUILDERPILOT ──────────────────── -->
+  <section class="section-pad" id="about" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="what-grid">
+        <div class="feature-list" role="list" aria-label="What BuilderPilot provides">
+          <div class="feature-item" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div>
+              <h4>Field Guides</h4>
+              <p>The Site Supervisor Playbook, the New Super Survival Guide, and the lessons that usually take years to learn the hard way.</p>
+            </div>
+          </div>
+
+          <div class="feature-item" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
+            <div>
+              <h4>Reporting &amp; AI Systems</h4>
+              <p>Turn voice notes into professional site reports in 15 minutes. The documentation that quietly wins disputes six months later.</p>
+            </div>
+          </div>
+
+          <div class="feature-item" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div>
+              <h4>Inspection &amp; Release Toolkits</h4>
+              <p>Pre-drywall release systems, checklists, and forms that catch the misses before board hides them. Walk. Verify. Release.</p>
+            </div>
+          </div>
+
+          <div class="feature-item" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <h4>Trade &amp; Safety Management</h4>
+              <p>Practical playbooks for sequencing trades, holding accountability, and running safety walks that build your due-diligence record.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="what-text">
+          <span class="label">What is BuilderPilot</span>
+          <h2 id="about-heading">
+            Built in the Field,<br>Not the <em>Classroom.</em>
+          </h2>
+          <p>
+            BuilderPilot is a growing suite of field tools, reporting systems, and guides designed specifically for low-rise residential site superintendents and production builders.
+          </p>
+          <p>
+            Every guide, checklist, and system comes from real production build experience on the ground — adapted so you can run it on your own phone, on your own projects, starting day one.
+          </p>
+
+          <div class="founder-card">
+            <div class="founder-avatar">
+              <img src="images/stephen-portrait.jpeg" alt="Stephen Ford, Founder of BuilderPilot">
+            </div>
+            <div>
+              <div class="founder-name">Stephen Ford</div>
+              <p class="founder-title">Founder · 20+ years, low-rise residential production</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRODUCTS / FIELD GUIDES ───────────────── -->
+  <section class="products-bg section-pad" id="products" aria-labelledby="products-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">The Field Guides</span>
+        <h2 id="products-heading">One Guide at a Time.<br>One Complete <em>System.</em></h2>
+        <p>BuilderPilot releases focused field guides — each one standalone and useful on its own. Every guide is a building block. They're all moving toward one place.</p>
+      </div>
+
+      <!-- Flagship -->
+      <div class="flagship" role="region" aria-label="Flagship in development: Site Supervisor Field Guide, Ontario Edition">
+        <div class="flagship-text">
+          <span class="flagship-badge">In Development · Ontario Edition</span>
+          <h3>The Site Supervisor<br><em>Field Guide</em></h3>
+          <p class="flagship-tagline">Where It's All Going.</p>
+          <p>
+            The complete field reference for low-rise residential site supervision in Ontario — every operational process, quality control system, scheduling framework, inspection protocol, and field leadership principle in one jobsite-ready guide. The smaller guides releasing now are its chapters. This is the full system.
+          </p>
+          <a href="#access" class="btn-primary">
+            Get Early Access Updates
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);margin-bottom:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;">Chapters in Progress</p>
+          <ul class="flagship-toc" role="list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Site setup &amp; underground locates</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Scheduling &amp; trade sequencing</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Inspections &amp; quality control</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Deficiency management</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Purchaser PDO &amp; Tarion warranty</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Ready-to-use site forms &amp; logs</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── Available Now: Pre-Drywall Inspection Checklist ── -->
+      <div class="release-band" role="region" aria-label="Available now: Pre-Drywall Inspection Checklist">
+        <div class="release-text">
+          <span class="release-badge">Available Now · Free</span>
+          <h3>Pre-Drywall Inspection<br><em>Checklist</em></h3>
+          <p class="release-tagline">Run the walk from your phone or pad.</p>
+          <p>
+            The pre-insulation sign-off system for low-rise residential builds. 6 stations, 3 inspection passes, 1 consolidated register. Catch the misses before board hides them.
+          </p>
+          <ul class="release-stations" role="list">
+            <li><span class="stn">100</span> Structure &amp; Framing Integrity</li>
+            <li><span class="stn">200</span> Mechanical Rough-Ins</li>
+            <li><span class="stn">300</span> Backing &amp; Blocking Register</li>
+            <li><span class="stn">400</span> Fire Separation &amp; Life Safety</li>
+            <li><span class="stn">500</span> Inspection Readiness</li>
+            <li><span class="stn">GATE</span> Drywall Release Authorization</li>
+          </ul>
+          <div class="release-ctas">
+            <button class="btn-primary" onclick="openLeadPopup()">
+              Get the Free Checklist
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <span class="release-bonus">+ Bonus: 25 Drywall Killers</span>
+          </div>
+        </div>
+        <div class="release-visual" aria-hidden="true">
+          <img src="images/checklist-tablet.png" alt="">
+        </div>
+      </div>
+
+      <div class="products-grid">
+
+        <div class="product-card featured">
+          <span class="product-badge">Available Now</span>
+          <div class="product-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3>The Site Supervisor Playbook</h3>
+          <p>100 things learned managing production housing — get there first, get your boots in every kitchen, own the outcome. The field wisdom that usually takes a decade.</p>
+          <div class="product-meta">
+            <span class="product-price">Field Guide</span>
+            <span class="product-tag">100 Rules</span>
+          </div>
+        </div>
+
+        <div class="product-card featured">
+          <span class="product-badge">$27</span>
+          <div class="product-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <h3>The AI Reporting Starter Kit</h3>
+          <p>Turn voice notes into professional site reports in 15 minutes. 8 ready-to-use prompts, a 4-phase daily rhythm, and phone setup. No new software, no typing.</p>
+          <div class="product-meta">
+            <span class="product-price">$27</span>
+            <span class="product-tag">8 Prompts</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <span class="product-badge free">Free · Bonus</span>
+          <div class="product-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3>The 25 Drywall Killers</h3>
+          <p>The rough-in, mechanical, framing, and extras misses that get hidden behind board — then cost you a removal, a callback, or a warranty claim. Included free with the Pre-Drywall Checklist.</p>
+          <div class="product-meta">
+            <span class="product-price">Free</span>
+            <span class="product-tag">Bonus Included</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <span class="product-badge coming">Coming Soon</span>
+          <div class="product-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <h3>New Super Survival Guide</h3>
+          <p>Just stepped up from trades to supervision? The fundamentals of running a site, the hard conversations, and the rhythm that makes the day manageable instead of reactive.</p>
+          <div class="product-meta">
+            <span class="product-price">Field Guide</span>
+            <span class="product-tag">Starter</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <span class="product-badge coming">Coming Soon</span>
+          <div class="product-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Trade Management System</h3>
+          <p>Sequence, brief, and hold trades accountable without burning the relationship. Trades are partners, not vendors — treat them like it and they perform like it.</p>
+          <div class="product-meta">
+            <span class="product-price">System</span>
+            <span class="product-tag">Coordination</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <span class="product-badge coming">Coming Soon</span>
+          <div class="product-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Safety Walk &amp; Inspection Playbook</h3>
+          <p>Run safety walks and inspections that build your due-diligence record automatically — plus the site forms and documentation system that ties it all together.</p>
+          <div class="product-meta">
+            <span class="product-price">System</span>
+            <span class="product-tag">Safety + Forms</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRINCIPLES ────────────────────────────── -->
+  <section class="section-pad" id="principles" aria-labelledby="principles-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">The Rules</span>
+        <h2 id="principles-heading">How a Real Super<br>Thinks About <em>The Field.</em></h2>
+        <p>Straight from the Playbook — the principles that shape every guide, checklist, and system BuilderPilot builds.</p>
+      </div>
+
+      <div class="principles-grid">
+
+        <div class="principle-card blue" role="figure" aria-label="Principle: Lead like you own it">
+          <div class="pc-eyebrow">Field Leadership</div>
+          <div class="pc-quote">
+            Lead Like<br>You<br><em>Own It.</em>
+          </div>
+          <div class="pc-brand">BuilderPilot</div>
+        </div>
+
+        <div class="principle-card dark" role="figure" aria-label="Principle: The site reflects the super">
+          <div class="pc-eyebrow">Rule #86</div>
+          <div class="pc-quote">
+            The Site<br>Reflects<br>The <em>Super.</em>
+          </div>
+          <div class="pc-brand">BuilderPilot</div>
+        </div>
+
+        <div class="principle-card amber" role="figure" aria-label="Principle: First on, last off">
+          <div class="pc-eyebrow">Rule #1</div>
+          <div class="pc-quote">
+            First On.<br>Last Off.
+          </div>
+          <div class="pc-brand">BuilderPilot</div>
+        </div>
+
+        <div class="principle-card dark-blue" role="figure" aria-label="Principle: There is no luck in production housing">
+          <div class="pc-eyebrow">Rule #100</div>
+          <div class="pc-quote">
+            No Luck In<br>Production.<br>Prep or <em>Chaos.</em>
+          </div>
+          <div class="pc-brand">BuilderPilot</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── A DAY IN THE LIFE ─────────────────────── -->
+  <section class="problem-bg section-pad" id="day" aria-labelledby="day-heading">
+    <div class="container">
+      <div class="section-header" style="text-align: center; align-items: center; display: flex; flex-direction: column;">
+        <span class="label">A Day in the Life</span>
+        <h2 id="day-heading">6:45 AM to 4:30 PM.<br>The Day, <em>Annotated.</em></h2>
+        <p style="text-align: center;">It's not a job description — it's how the day actually moves on a low-rise residential site, written by someone who's lived it.</p>
+      </div>
+
+      <div class="day-list">
+        <div class="day-item">
+          <div class="day-time">6:45 AM</div>
+          <div class="day-content">
+            <h4>Arrive On Site</h4>
+            <p>First in — that's non-negotiable. Espresso on before the guys punch in. The first few minutes are the best read you'll get on the day ahead. Your to-do list was built yesterday, not this morning.</p>
+          </div>
+        </div>
+
+        <div class="day-item">
+          <div class="day-time">8:00 AM</div>
+          <div class="day-content">
+            <h4>The Morning Walk</h4>
+            <p>A full loop — every unit, every floor. Boots in the kitchen of every house; that one checkpoint forces you through the whole unit. Confirm lock-ups, inspection readiness, and no overnight surprises.</p>
+          </div>
+        </div>
+
+        <div class="day-item">
+          <div class="day-time">9:30 AM</div>
+          <div class="day-content">
+            <h4>Coffee Truck &amp; Check-In</h4>
+            <p>Leaders eat last — you wait until every person on site has gone ahead of you. It's a small thing. Everyone notices it. By now you've heard from the inspector on timing.</p>
+          </div>
+        </div>
+
+        <div class="day-item">
+          <div class="day-time">Mid-Morning</div>
+          <div class="day-content">
+            <h4>Office Work — Schedules, Orders, Confirmations</h4>
+            <p>Update progress trackers, place material orders, follow up. The double-confirmation rule: emailed a schedule? Call. Called? Email. An unconfirmed delivery is just a wish.</p>
+          </div>
+        </div>
+
+        <div class="day-item">
+          <div class="day-time">Afternoon</div>
+          <div class="day-content">
+            <h4>Inspections + QC Walk</h4>
+            <p>Be present and have documentation ready. After the inspector clears, you walk again — a quality-control sweep. Mark up trade work while they're still on site; nobody wants a callback trip.</p>
+          </div>
+        </div>
+
+        <div class="day-item">
+          <div class="day-time">4:30 PM</div>
+          <div class="day-content">
+            <h4>End of Day</h4>
+            <p>Confirm what got done, hand out tomorrow's tasks so nobody shows up without direction. Recap the day into the system, lock the office last, and walk the site before you drive off. Then do it again tomorrow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHO IT'S FOR ──────────────────────────── -->
+  <section class="audience-bg section-pad" id="who" aria-labelledby="who-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Who It's For</span>
+        <h2 id="who-heading">Built for the<br>People on <em>Site.</em></h2>
+        <p>BuilderPilot is for the people who actually build the homes — supervisors, coordinators, and the builders developing them.</p>
+      </div>
+
+      <div class="audience-grid">
+
+        <div class="audience-card">
+          <div class="audience-role">Site Supervisors</div>
+          <p>Running one or more production sites and looking to sharpen your systems, tighten your reporting, and lead a site your trades respect.</p>
+          <ul class="audience-benefits" role="list">
+            <li>The 100-rule Playbook from two decades in the field</li>
+            <li>Walk · Log · Recap · Track as a daily operating system</li>
+            <li>Reporting that builds a searchable, defensible record</li>
+            <li>Trade and safety playbooks you can run tomorrow</li>
+          </ul>
+        </div>
+
+        <div class="audience-card">
+          <div class="audience-role">Production Builders</div>
+          <p>Growing a residential construction business and developing a field team from the inside — with consistent language and systems across every super.</p>
+          <ul class="audience-benefits" role="list">
+            <li>Content built for low-rise residential production specifically</li>
+            <li>Shared standards across your whole field team</li>
+            <li>Tools to develop emerging supers without generic courses</li>
+            <li>Pre-closing systems that reduce deficiencies and callbacks</li>
+          </ul>
+        </div>
+
+        <div class="audience-card">
+          <div class="audience-role">New &amp; Assistant Supers</div>
+          <p>Recently stepped up from trades to supervision and feeling the weight of it. The survival guide and daily rhythm that make the job manageable fast.</p>
+          <ul class="audience-benefits" role="list">
+            <li>The New Super Survival Guide and day-in-the-life rhythm</li>
+            <li>Inspection prep and pre-drywall release checklists</li>
+            <li>Frameworks for the hard conversations</li>
+            <li>Real-world advice without the theory</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ───────────────────────────────────── -->
+  <section class="cta-section section-pad" id="access" aria-labelledby="cta-heading">
+    <div class="container">
+      <div class="cta-inner">
+        <span class="label" style="display: block; margin-bottom: 16px;">Get Started</span>
+        <h2 id="cta-heading">
+          Walk. Verify. <em>Release.</em>
+        </h2>
+        <p>
+          Join the BuilderPilot list for new field guides, systems, and tools as they drop — and start with the free pre-drywall checklist that's already saving supers from costly callbacks.
+        </p>
+
+        <div class="ml-embedded" data-form="koGAMk"></div>
+
+        <p class="cta-note">No spam. Built for people who build. Unsubscribe anytime.</p>
+
+        <a href="https://builderpilot.gumroad.com" class="cta-secondary" rel="noopener noreferrer" target="_blank">
+          Browse the full suite on Gumroad
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <a href="#" class="footer-logo" aria-label="BuilderPilot home">
+            <div class="footer-logo-icon" aria-hidden="true"><span>B<em>P</em></span></div>
+            <span class="footer-logo-wordmark">Builder<em>Pilot</em></span>
+          </a>
+          <p>Field systems for production residential construction. Tools, reporting systems, and guides for low-rise residential site superintendents and builders.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Field Guides</h5>
+          <ul role="list">
+            <li><a href="#products">Site Supervisor Playbook</a></li>
+            <li><a href="#products">New Super Survival Guide</a></li>
+            <li><a href="#products">AI Reporting Kit</a></li>
+            <li><a href="#products">The 25 Drywall Killers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <ul role="list">
+            <li><a href="#system">The System</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#principles">The Rules</a></li>
+            <li><a href="#who">Who It's For</a></li>
+            <li><a href="mentorship.html">Mentorship</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Get the Guides</h5>
+          <ul role="list">
+            <li><a href="https://builderpilot.gumroad.com" rel="noopener noreferrer" target="_blank">Gumroad Store</a></li>
+            <li><a href="https://instagram.com/builderpilotguide" rel="noopener noreferrer" target="_blank">@builderpilotguide</a></li>
+            <li><a href="#access">Free Checklist</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 <em>BuilderPilot</em> · Stephen Ford · Field Systems for Production Residential Construction.</p>
+        <div class="social-links" role="list" aria-label="Social media links">
+          <a href="https://instagram.com/builderpilotguide" aria-label="BuilderPilot on Instagram" rel="noopener noreferrer" target="_blank" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://builderpilot.gumroad.com" aria-label="BuilderPilot on Gumroad" rel="noopener noreferrer" target="_blank" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <p class="footer-disclaimer">
+        BuilderPilot is an independent educational resource. It is not affiliated with, endorsed by, or derived from any specific employer, builder, or proprietary system. References to regulations (OHSA, the Ontario Building Code, Tarion, the Construction Act) are general — always confirm current requirements with the governing authority. Nothing here is legal advice.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ─── LEAD MAGNET POPUP ────────────────────── -->
+  <div class="popup-overlay" id="leadPopup" aria-hidden="true">
+    <div class="popup-modal" role="dialog" aria-modal="true" aria-labelledby="popup-heading">
+      <button class="popup-close" onclick="closeLeadPopup()" aria-label="Close popup">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="popup-grid">
+
+        <!-- Visual: checklist cover -->
+        <div class="popup-visual" aria-hidden="true">
+          <img src="images/checklist-cover.png" alt="">
+          <div class="popup-visual-badge"><span>Free Download · Pre-Drywall System</span></div>
+        </div>
+
+        <!-- Copy + form -->
+        <div class="popup-content">
+          <span class="label">Before You Board Up The Walls</span>
+          <h2 id="popup-heading">Catch the<br>Misses Before<br><em>Board Goes Up.</em></h2>
+          <p>The Pre-Drywall Inspection Checklist — 6 stations, fillable on your phone or tablet. Plus the 25 Drywall Killers as a bonus.</p>
+
+          <ul class="popup-includes" role="list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Pre-Drywall Inspection Checklist (6 stations)
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Bonus: The 25 Drywall Killers (framing, mechanical &amp; rough-in misses)
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Print or fill on screen — built for the field
+            </li>
+          </ul>
+
+          <form id="popupForm">
+            <div class="popup-field">
+              <input
+                type="email"
+                id="popupEmail"
+                name="email"
+                data-fs-field
+                placeholder="your@email.com"
+                required
+                autocomplete="email"
+                aria-label="Your email address"
+              >
+              <button type="submit" class="btn-primary" data-fs-submit-btn>
+                Send It to Me
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+            <span data-fs-error="email" class="popup-error-msg"></span>
+            <span data-fs-error class="popup-error-msg"></span>
+            <p class="popup-fine">Free. No spam. Unsubscribe any time.</p>
+          </form>
+
+          <!-- Success state: shown by @formspree/ajax on submission -->
+          <div class="popup-success" id="popupSuccess" data-fs-success aria-live="polite">
+            <div class="popup-success-check" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>You're In.</h3>
+            <p>Check your inbox. While you wait, download the 25 Drywall Killers directly:</p>
+            <a href="downloads/BuilderPilot_25_Drywall_Killers.pdf" class="btn-primary" download>
+              Download Now
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </a>
+            <p class="popup-fine">The full Pre-Drywall Checklist will arrive by email shortly.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    function toggleNav(btn) {
+      const mobileNav = document.getElementById('mobile-nav');
+      const isOpen = mobileNav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+    }
+
+    function closeMobileNav() {
+      document.getElementById('mobile-nav').classList.remove('open');
+      document.querySelector('.hamburger').setAttribute('aria-expanded', 'false');
+    }
+
+    document.addEventListener('click', (e) => {
+      const nav = document.getElementById('mobile-nav');
+      const btn = document.querySelector('.hamburger');
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    /* ─── LEAD MAGNET POPUP ────────────────────── */
+    (function() {
+      const SUBSCRIBED_KEY  = 'bp_subscribed';
+      const DISMISSED_KEY   = 'bp_popup_dismissed';
+      const DISMISS_TTL     = 3 * 24 * 60 * 60 * 1000; // 3 days
+
+      function shouldShow() {
+        if (localStorage.getItem(SUBSCRIBED_KEY)) return false;
+        const ts = localStorage.getItem(DISMISSED_KEY);
+        if (ts && (Date.now() - parseInt(ts, 10)) < DISMISS_TTL) return false;
+        return true;
+      }
+
+      window.openLeadPopup = function() {
+        if (!shouldShow()) return;
+        const overlay = document.getElementById('leadPopup');
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('popupEmail').focus();
+      };
+
+      window.closeLeadPopup = function() {
+        const overlay = document.getElementById('leadPopup');
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        localStorage.setItem(DISMISSED_KEY, Date.now().toString());
+      };
+
+      // Trigger: 7 seconds after load
+      let triggered = false;
+      function trigger() {
+        if (triggered) return;
+        triggered = true;
+        openLeadPopup();
+      }
+
+      setTimeout(trigger, 7000);
+
+      // Trigger: scroll past hero
+      window.addEventListener('scroll', function onScroll() {
+        if (window.scrollY > window.innerHeight * 0.85) {
+          trigger();
+          window.removeEventListener('scroll', onScroll);
+        }
+      }, { passive: true });
+
+      // Close on overlay click
+      document.getElementById('leadPopup').addEventListener('click', function(e) {
+        if (e.target === this) closeLeadPopup();
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && document.getElementById('leadPopup').classList.contains('open')) {
+          closeLeadPopup();
+        }
+      });
+    })();
+
+    // Set bp_subscribed when Formspree shows the success state
+    new MutationObserver(function() {
+      if (document.getElementById('popupSuccess').style.display !== 'none') {
+        localStorage.setItem('bp_subscribed', '1');
+      }
+    }).observe(document.getElementById('popupSuccess'), { attributes: true, attributeFilter: ['style'] });
+  </script>
+
+  <!-- Formspree Ajax -->
+  <script>
+    window.formspree = window.formspree || function() { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#popupForm', formId: 'xzdqlgal' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
