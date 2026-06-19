@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 
 #### 📈 Xueqiu (雪球) — 全面修复
 
-- **修复 400 错误根本原因：** `_ensure_cookies()` 仅访问首页只能获取 `acw_tc`（防 DDoS token），`xq_a_token` 由雪球前端 JS 动态生成，无法通过纯 HTTP 请求获取。新增三级 cookie 加载策略：① 读取 config 文件（`--from-browser` 保存的）→ ② 自动从本地 Chrome 测览器提取（需安装 browser-cookie3）→ ③ homepage fallback
+- **修复 400 错误根本原因：** `_ensure_cookies()` 仅访问首页只能获取 `acw_tc`（防 DDoS token），`xq_a_token` 由雪球前端 JS 动态生成，无法通过纯 HTTP 请求获取。新增三级 cookie 加载策略：① 读取 config 文件（`--from-browser` 保存的）→ ② 自动从本地 Chrome 浏览器提取（需安装 browser-cookie3）→ ③ homepage fallback
 - **修复 User-Agent：** `"agent-reach/1.0"` 被雪球反爬系统识别拒绝，改为真实 Chrome UA
 - **修复缺失 `Referer` 头：** 所有 API 请求加上 `Referer: https://xueqiu.com/`
 - **修复 `get_hot_posts()` 端点：** 原端点 `/statuses/hot/listV3.json` 已废弃（返回空 body），改为 `/v4/statuses/public_timeline_by_category.json`，正确解析 `item.data` JSON 字符串获取 author/likes/text
@@ -55,7 +55,7 @@ All notable changes to this project will be documented in this file.
 - Search people and jobs via MCP, with Exa fallback
 - Fallback to Jina Reader when MCP is not configured
 - 通过 linkedin-scraper-mcp 读取个人 Profile、公司页面、职位详情
-- 通过 MCP 搜索人才和职位，Exa 兜底
+- 通过 MCP 搜索人才和职位，Exa 刀底
 - 未配置 MCP 时自动 fallback 到 Jina Reader
 
 #### 🏢 Boss直聘
@@ -64,7 +64,7 @@ All notable changes to this project will be documented in this file.
 - Fallback to Jina Reader for reading job pages
 - 通过 mcp-bosszp 扫码登录
 - MCP 搜索职位、向 HR 打招呼
-- Jina Reader 兜底读取职位页面
+- Jina Reader 刀底读取职位页面
 
 ### 📈 Improvements / 改进
 
